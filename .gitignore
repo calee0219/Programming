@@ -1,4 +1,5 @@
 #Programming/.gitiginore
 
 *.o
+*.exe
 
