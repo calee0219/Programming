@@ -11,8 +11,32 @@
 #include <math.h>
 #include <time.h>
 
-int main()
+void heapify(int* ptr, int now, int last);
+void swap(int* i, int* j);
+
+int main(int argc, char* artv[])
 {
     return 0;
+}
+
+void heapify(int* ptr, int now, int last)
+{
+    if(now == last)
+        return;
+    if(ptr[now] > ptr[now/2] && ptr[now] > ptr[now/2+1])
+        heapify(ptr, now-1, last);
+    else
+    {
+        swap(&ptr[now], (ptr[now/2] > ptr[now/2+1]) ? &ptr[now/2]:&ptr[now/2+1] ); 
+    }
+    return;
+}
+
+void swap(int* i, int* j)
+{
+    int tmp = *i;
+    *i = *j;
+    *j = tmp;
+    return;
 }
 
