@@ -14,31 +14,29 @@
 void heap_sort(int* arr, int len);
 void heapify(int* ptr, int now, int last);
 void swap(int* i, int* j);
+void print_tri(int* arr, int len);
 
 int main()
 {
-    int a[17] = {1, 4, 2, 3, 2, 12, 6, 234, 2, 254356, 44, 21, 2, 456767, 1, 8, 10};
-    heap_sort(a, 17);
+    //int a[15] = {1, 2, 12, 6, 234, 2, 254, 44, 21, 2, 4767, 1, 8, 10, 66};
+    int a[63];
     int i;
-    for(i = 0; i < pow(17, 1/2); ++i)
-    {
-        int j;
-        for(j = 0; j < pow(2, i); ++j)
-            printf("%d ", a[j]);
-        printf("\n");
-    }
+    for(i = 0; i < 63; ++i)
+        a[i] = i;
+    heap_sort(a, 63);
+    print_tri(a, 63);
     return 0;
 }
 
 void heap_sort(int* arr, int len)
 {
-    heapify(arr, len/2, len);
+    //heapify(arr, len/2-1, len);
     return;
 }
 
 void heapify(int* ptr, int now, int last)
 {
-    if(now == last)
+    if(now == last || now < 0)
         return;
     if(ptr[now] > ptr[now/2] && ptr[now] > ptr[now/2+1])
         heapify(ptr, now-1, last);
@@ -57,6 +55,44 @@ void swap(int* i, int* j)
     int tmp = *i;
     *i = *j;
     *j = tmp;
+    return;
+}
+
+void print_tri(int* arr, int len)
+{
+    int layer = 0;
+    while(len)
+    {
+        len >>= 1;
+        layer++;
+    }
+    int ord = 0;
+    int i;
+    for(i = 0; i < layer; ++i)
+    {
+        int k;
+        for(k = 0; k < pow(2, layer-i-2)-1; ++k)
+            printf("  ");
+        int j;
+        for(j = 0; j < pow(2, i); ++j)
+        {
+            if(i != layer-1)
+                printf(" /");
+            for(k = 0; k < pow(2, layer-i-2)-1; ++k)
+                printf("--");
+            printf("%02d", arr[ord]);
+            ord++;
+            for(k = 0; k < pow(2, layer-i-2)-1; ++k)
+                printf("--");
+            if(i != layer-1)
+                printf("\\ ");
+            else
+                printf("  ");
+            for(k = 0; k < pow(2, layer-i-1)-1; ++k)
+                printf("  ");
+        }
+        printf("\n");
+    }
     return;
 }
 
