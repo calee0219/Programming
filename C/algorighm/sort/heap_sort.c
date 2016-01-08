@@ -11,12 +11,29 @@
 #include <math.h>
 #include <time.h>
 
+void heap_sort(int* arr, int len);
 void heapify(int* ptr, int now, int last);
 void swap(int* i, int* j);
 
-int main(int argc, char* artv[])
+int main()
 {
+    int a[17] = {1, 4, 2, 3, 2, 12, 6, 234, 2, 254356, 44, 21, 2, 456767, 1, 8, 10};
+    heap_sort(a, 17);
+    int i;
+    for(i = 0; i < pow(17, 1/2); ++i)
+    {
+        int j;
+        for(j = 0; j < pow(2, i); ++j)
+            printf("%d ", a[j]);
+        printf("\n");
+    }
     return 0;
+}
+
+void heap_sort(int* arr, int len)
+{
+    heapify(arr, len/2, len);
+    return;
 }
 
 void heapify(int* ptr, int now, int last)
@@ -27,7 +44,10 @@ void heapify(int* ptr, int now, int last)
         heapify(ptr, now-1, last);
     else
     {
-        swap(&ptr[now], (ptr[now/2] > ptr[now/2+1]) ? &ptr[now/2]:&ptr[now/2+1] ); 
+        int max = (ptr[now/2] > ptr[now/2+1]) ? now/2 : now/2+1;
+        swap(&ptr[now], &ptr[max]); 
+        if(max < last/2)
+            heapify(ptr, max, last);
     }
     return;
 }
