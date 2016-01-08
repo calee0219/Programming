@@ -18,14 +18,14 @@ void print_tri(int* arr, int len);
 
 int main()
 {
-    //int a[15] = {1, 2, 12, 6, 234, 2, 254, 44, 21, 2, 4767, 1, 8, 10, 66};
     srand(time(NULL));
     int a[63];
-    int n = rand() % 50;
+    int n = rand() % 64;
     printf("%d\n", n);
     int i;
     for(i = 0; i < n; ++i)
-        a[i] = i;
+        a[i] = rand() % 100;
+    print_tri(a, n);
     heap_sort(a, n);
     print_tri(a, n);
     return 0;
@@ -33,23 +33,22 @@ int main()
 
 void heap_sort(int* arr, int len)
 {
-    //heapify(arr, len/2-1, len);
+    heapify(arr, len/2-1, len);
     return;
 }
 
 void heapify(int* ptr, int now, int last)
 {
-    if(now == last || now < 0)
+    if(now >= last/2 || now < 0)
         return;
-    if(ptr[now] > ptr[now/2] && ptr[now] > ptr[now/2+1])
-        heapify(ptr, now-1, last);
-    else
+    if(!(ptr[now] > ptr[now*2+1] && ptr[now] > ptr[now*2+2]))
     {
-        int max = (ptr[now/2] > ptr[now/2+1]) ? now/2 : now/2+1;
+        int max = (now*2+2 < last) ? (ptr[now*2+1] > ptr[now*2+2]) ? now*2+1 : now*2+2 : now*2+1;
         swap(&ptr[now], &ptr[max]); 
         if(max < last/2)
             heapify(ptr, max, last);
     }
+    heapify(ptr, now-1, last);
     return;
 }
 
