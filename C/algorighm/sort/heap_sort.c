@@ -19,12 +19,15 @@ void print_tri(int* arr, int len);
 int main()
 {
     //int a[15] = {1, 2, 12, 6, 234, 2, 254, 44, 21, 2, 4767, 1, 8, 10, 66};
+    srand(time(NULL));
     int a[63];
+    int n = rand() % 50;
+    printf("%d\n", n);
     int i;
-    for(i = 0; i < 63; ++i)
+    for(i = 0; i < n; ++i)
         a[i] = i;
-    heap_sort(a, 63);
-    print_tri(a, 63);
+    heap_sort(a, n);
+    print_tri(a, n);
     return 0;
 }
 
@@ -61,34 +64,42 @@ void swap(int* i, int* j)
 void print_tri(int* arr, int len)
 {
     int layer = 0;
-    while(len)
+    int tmp = len;
+    while(tmp)
     {
-        len >>= 1;
+        tmp >>= 1;
         layer++;
     }
     int ord = 0;
-    int i;
-    for(i = 0; i < layer; ++i)
+    int tmp_lay;
+    for(tmp_lay = 0; tmp_lay < layer; ++tmp_lay)
     {
         int k;
-        for(k = 0; k < pow(2, layer-i-2)-1; ++k)
+        for(k = 0; k < pow(2, layer-tmp_lay-2)-1; ++k)
             printf("  ");
         int j;
-        for(j = 0; j < pow(2, i); ++j)
+        for(j = 0; j < pow(2, tmp_lay); ++j)
         {
-            if(i != layer-1)
-                printf(" /");
-            for(k = 0; k < pow(2, layer-i-2)-1; ++k)
+            if(tmp_lay < layer-1)
+            {
+                if(ord*2+1 < len)
+                    printf(" /");
+                else
+                    printf("  ");
+            }
+            for(k = 0; k < pow(2, layer-tmp_lay-2)-1; ++k)
                 printf("--");
             printf("%02d", arr[ord]);
-            ord++;
-            for(k = 0; k < pow(2, layer-i-2)-1; ++k)
+            for(k = 0; k < pow(2, layer-tmp_lay-2)-1; ++k)
                 printf("--");
-            if(i != layer-1)
+            if(tmp_lay < layer-1 && ord*2+2 < len)
                 printf("\\ ");
             else
                 printf("  ");
-            for(k = 0; k < pow(2, layer-i-1)-1; ++k)
+            ord++;
+            if(ord >= pow(2, tmp_lay+1)-1 || ord >= len)
+                break;
+            for(k = 0; k < pow(2, layer-tmp_lay-1)-1; ++k)
                 printf("  ");
         }
         printf("\n");
