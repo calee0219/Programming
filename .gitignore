@@ -62,3 +62,7 @@
 # Debug files
 *.dSYM/
 
+# Other files
+test.*
+test
+
