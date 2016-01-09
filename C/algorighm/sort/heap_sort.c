@@ -11,29 +11,47 @@
 #include <math.h>
 #include <time.h>
 
+#define KNRM  "\x1B[0m"
+#define KRED  "\x1B[31m"
+#define KGRN  "\x1B[32m"
+#define KYEL  "\x1B[33m"
+#define KBLU  "\x1B[34m"
+#define KMAG  "\x1B[35m"
+#define KCYN  "\x1B[36m"
+#define KWHT  "\x1B[37m"
+
+int n;
+
 void heap_sort(int* arr, int len);
 void heapify(int* ptr, int now, int last);
-void swap(int* i, int* j);
-void print_tri(int* arr, int len);
+void swap(int* ptr, int i, int j, int col);
+void print_tri(int col, int* arr, int len, int col_1, int col_2);
+void sub_heapify(int* ptr, int now, int last);
+void max_heap(int* ptr, int len);
 
 int main()
 {
     srand(time(NULL));
     int a[63];
-    int n = rand() % 64;
+    n = rand() % 16;
+    n <<= 1;
     printf("%d\n", n);
     int i;
     for(i = 0; i < n; ++i)
         a[i] = rand() % 100;
-    print_tri(a, n);
+    system("clear");
+    print_tri(0, a, n, 0, 0);
     heap_sort(a, n);
-    print_tri(a, n);
+    print_tri(0, a, n, 0, 0);
+    for(i = 0; i < n; ++i)
+        printf("->%d", a[i]);
     return 0;
 }
 
 void heap_sort(int* arr, int len)
 {
     heapify(arr, len/2-1, len);
+    max_heap(arr, len);
     return;
 }
 
@@ -41,27 +59,51 @@ void heapify(int* ptr, int now, int last)
 {
     if(now >= last/2 || now < 0)
         return;
-    if(!(ptr[now] > ptr[now*2+1] && ptr[now] > ptr[now*2+2]))
-    {
-        int max = (now*2+2 < last) ? (ptr[now*2+1] > ptr[now*2+2]) ? now*2+1 : now*2+2 : now*2+1;
-        swap(&ptr[now], &ptr[max]); 
-        if(max < last/2)
-            heapify(ptr, max, last);
-    }
+    sub_heapify(ptr, now, last);
     heapify(ptr, now-1, last);
     return;
 }
 
-void swap(int* i, int* j)
+void sub_heapify(int* ptr, int now, int last)
 {
-    int tmp = *i;
-    *i = *j;
-    *j = tmp;
+    if(now*2+2 < last && !(ptr[now] >= ptr[now*2+1] && ptr[now] >= ptr[now*2+2]))
+    {
+        int max = (ptr[now*2+1] > ptr[now*2+2]) ? now*2+1 : now*2+2;
+        swap(ptr, now, max, 1); 
+        if(max < last/2)
+            sub_heapify(ptr, max, last);
+    }
+    else if(now*2+1 < last && ptr[now] < ptr[now*2+1])
+    {
+        swap(ptr, now, now*2+1, 1);
+        if(now*2+1 < last/2)
+            sub_heapify(ptr, now*2+1, last);
+    }
     return;
 }
 
-void print_tri(int* arr, int len)
+void max_heap(int* ptr, int len)
 {
+    if(len <= 1)
+        return;
+    swap(ptr, 0, len-1, 2);
+    sub_heapify(ptr, 0, len-1);
+    max_heap(ptr, len-1);
+    return;
+}
+
+void swap(int* ptr, int i, int j, int col)
+{
+    int tmp = ptr[i];
+    ptr[i] = ptr[j];
+    ptr[j] = tmp;
+    print_tri(col, ptr, n, i, j);
+    return;
+}
+
+void print_tri(int col, int* arr, int len, int col_1, int col_2)
+{
+    system("clear");
     int layer = 0;
     int tmp = len;
     while(tmp)
@@ -88,7 +130,25 @@ void print_tri(int* arr, int len)
             }
             for(k = 0; k < pow(2, layer-tmp_lay-2)-1; ++k)
                 printf("--");
-            printf("%02d", arr[ord]);
+            if(ord == col_1 || ord == col_2)
+            {
+                switch(col) {
+                case 0:
+                    printf("%s%02d", KNRM, arr[ord]);
+                    break;
+                case 1:
+                    printf("%s%02d", KGRN, arr[ord]);
+                    break;
+                case 2:
+                    printf("%s%02d", KBLU, arr[ord]);
+                    break;
+                default:
+                    printf("%s%02d", KNRM, arr[ord]);
+                }
+            }
+            else
+                printf("%s%02d", KNRM, arr[ord]);
+            printf("%s", KNRM);
             for(k = 0; k < pow(2, layer-tmp_lay-2)-1; ++k)
                 printf("--");
             if(tmp_lay < layer-1 && ord*2+2 < len)
@@ -103,6 +163,7 @@ void print_tri(int* arr, int len)
         }
         printf("\n");
     }
+    system("sleep 0.5");
     return;
 }
 
