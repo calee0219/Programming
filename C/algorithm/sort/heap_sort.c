@@ -111,55 +111,70 @@ void print_tri(int col, int* arr, int len, int col_1, int col_2)
         tmp >>= 1;
         layer++;
     }
+    int cl = 3;
     int ord = 0;
     int tmp_lay;
     for(tmp_lay = 0; tmp_lay < layer; ++tmp_lay)
     {
-        int k;
-        for(k = 0; k < pow(2, layer-tmp_lay-2)-1; ++k)
-            printf("  ");
-        int j;
-        for(j = 0; j < pow(2, tmp_lay); ++j)
+        int j, k;
+        for(j = 0; j < pow(2, layer-tmp_lay-2)-1; ++j)
+            for(k = 0; k < cl; ++k)
+                printf(" ");
+        int i;
+        for(i = 0; i < pow(2, tmp_lay); ++i)
         {
             if(tmp_lay < layer-1)
             {
                 if(ord*2+1 < len)
-                    printf(" /");
+                {
+                    for(k = 0; k < cl-1; ++k)
+                        printf(" ");
+                    printf("/");
+                }
                 else
-                    printf("  ");
+                    for(k = 0; k < cl; ++k)
+                        printf(" ");
             }
-            for(k = 0; k < pow(2, layer-tmp_lay-2)-1; ++k)
-                printf("--");
+            for(j = 0; j < pow(2, layer-tmp_lay-2)-1; ++j)
+                for(k = 0; k < cl; ++k)
+                    printf("-");
             if(ord == col_1 || ord == col_2)
             {
                 switch(col) {
                 case 0:
-                    printf("%s%02d", KNRM, arr[ord]);
+                    printf("%s%0*d", KNRM, cl, arr[ord]);
                     break;
                 case 1:
-                    printf("%s%02d", KGRN, arr[ord]);
+                    printf("%s%0*d", KGRN, cl, arr[ord]);
                     break;
                 case 2:
-                    printf("%s%02d", KBLU, arr[ord]);
+                    printf("%s%0*d", KBLU, cl, arr[ord]);
                     break;
                 default:
-                    printf("%s%02d", KNRM, arr[ord]);
+                    printf("%s%0*d", KNRM, cl, arr[ord]);
                 }
             }
             else
-                printf("%s%02d", KNRM, arr[ord]);
+                printf("%s%0*d", KNRM, cl, arr[ord]);
             printf("%s", KNRM);
-            for(k = 0; k < pow(2, layer-tmp_lay-2)-1; ++k)
-                printf("--");
+            for(j = 0; j < pow(2, layer-tmp_lay-2)-1; ++j)
+                for(k = 0; k < cl; ++k)
+                    printf("-");
             if(tmp_lay < layer-1 && ord*2+2 < len)
-                printf("\\ ");
+            {
+                printf("\\");
+                for(k = 0; k < cl-1; ++k)
+                    printf(" ");
+            }
             else
-                printf("  ");
+                for(k = 0; k < cl; ++k)
+                    printf(" ");
             ord++;
             if(ord >= pow(2, tmp_lay+1)-1 || ord >= len)
                 break;
-            for(k = 0; k < pow(2, layer-tmp_lay-1)-1; ++k)
-                printf("  ");
+            for(j = 0; j < pow(2, layer-tmp_lay-1)-1; ++j)
+                for(k = 0; k < cl; ++k)
+                    printf(" ");
         }
         printf("\n");
     }
