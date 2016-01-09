@@ -2,15 +2,8 @@
 
 int main ()
 {
-	char c;
-	while (1) {
-		c = getchar();
-		if (c == '#') ungetc ('@', stdin);
-		else ungetc (c, stdin);
-		printf("%c", c);
-		if(c = 'a')
-			break;
-	}
+    int n = 4;
+    printf("%0*d", n, 3);
 	return 0;
 }
 
