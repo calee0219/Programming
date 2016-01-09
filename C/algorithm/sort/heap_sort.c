@@ -21,6 +21,8 @@
 #define KWHT  "\x1B[37m"
 
 int n;
+char check[100000] = {0};
+int now_red = -1;
 
 void heap_sort(int* arr, int len);
 void heapify(int* ptr, int now, int last);
@@ -33,9 +35,7 @@ int main()
 {
     srand(time(NULL));
     int a[63];
-    n = rand() % 16;
-    n <<= 1;
-    printf("%d\n", n);
+    n = 63; //rand() % 64;
     int i;
     for(i = 0; i < n; ++i)
         a[i] = rand() % 100;
@@ -111,7 +111,20 @@ void print_tri(int col, int* arr, int len, int col_1, int col_2)
         tmp >>= 1;
         layer++;
     }
-    int cl = 3;
+    int cl = 1;
+    int i;
+    for(i = 0; i < len; ++i)
+    {
+        int tmp = arr[i];
+        int l = 0;
+        while(tmp)
+        {
+            tmp /= 10;
+            l++;
+        }
+        if(l > cl)
+            cl = l;
+    }
     int ord = 0;
     int tmp_lay;
     for(tmp_lay = 0; tmp_lay < layer; ++tmp_lay)
@@ -120,7 +133,6 @@ void print_tri(int col, int* arr, int len, int col_1, int col_2)
         for(j = 0; j < pow(2, layer-tmp_lay-2)-1; ++j)
             for(k = 0; k < cl; ++k)
                 printf(" ");
-        int i;
         for(i = 0; i < pow(2, tmp_lay); ++i)
         {
             if(tmp_lay < layer-1)
@@ -149,10 +161,18 @@ void print_tri(int col, int* arr, int len, int col_1, int col_2)
                     break;
                 case 2:
                     printf("%s%0*d", KBLU, cl, arr[ord]);
+                    check[col_2] = 1;
+                    now_red = col_2;
                     break;
                 default:
                     printf("%s%0*d", KNRM, cl, arr[ord]);
                 }
+            }
+            else if(ord == now_red)
+                printf("%s%0*d", KRED, cl, arr[ord]);
+            else if(check[ord])
+            {
+                printf("%s%0*d", KYEL, cl, arr[ord]);
             }
             else
                 printf("%s%0*d", KNRM, cl, arr[ord]);
@@ -178,7 +198,7 @@ void print_tri(int col, int* arr, int len, int col_1, int col_2)
         }
         printf("\n");
     }
-    system("sleep 0.5");
+    system("sleep 0.05");
     return;
 }
 
