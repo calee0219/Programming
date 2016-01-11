@@ -41,7 +41,7 @@ int main()
         a[i] = rand() % 100;
     system("clear");
     shell_sort(a, n);
-    print_tri(a, n, 0, 0);
+    print_tri(a, 1, 0, 0);
     return 0;
 }
 
@@ -54,10 +54,10 @@ void shell_sort(int* ptr, int len)
         for(i = gap; i < len; ++i)
         {
             int j;
-            for(j = i-gap; j >= 0; j-=gap)
+            for(j = i; j >= gap; j-=gap)
             {
-                if(ptr[i] > ptr[j])
-                    swap(ptr, i, j, gap);
+                if(ptr[j] > ptr[j-gap])
+                    swap(ptr, j, j-gap, gap);
                 else
                     break;
             }
@@ -80,17 +80,8 @@ void print_tri(int* arr, int len, int col_1, int col_2)
 {
     system("clear");
     printf("%s", RESET);
-    int i;
-    for(i = 0; i < n; ++i)
-    {
-        if(i == col_1 || i == col_2)
-            printf("->%s%d", KGRN, arr[i]);
-        else
-            printf("->%s%d", KNRM, arr[i]);
-        printf("%s", RESET);
-    }
-    printf("\n");
     int cl = 1;
+    int i;
     for(i = 0; i < len; ++i)
     {
         int tmp = arr[i];
@@ -108,11 +99,14 @@ void print_tri(int* arr, int len, int col_1, int col_2)
         if(i % len == 0)
             printf("\n");
         if(i == col_1 || i == col_2)
-            printf("%s%0*d ", KRED, cl, arr[i]);
+            printf("-> %s%0*d", KRED, cl, arr[i]);
+        else if(i % len == col_1 % len)
+            printf("-> %s%0*d", KGRN, cl, arr[i]);
         else
-            printf("%s%0*d ", KNRM, cl, arr[i]);
+            printf("-> %s%0*d", KNRM, cl, arr[i]);
         printf("%s", RESET);
     }
+    printf("\n");
     system("sleep 0.5");
     return;
 }
