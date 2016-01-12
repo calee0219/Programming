@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <string.h>
 
 char a[100+1];
 int ord;
@@ -65,3 +66,4 @@ int main()
     }
     return 0;
 }
+

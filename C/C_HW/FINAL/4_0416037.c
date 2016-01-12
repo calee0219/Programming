@@ -46,3 +46,4 @@ int main()
         fprintf(fout, "%s\n", str[i]);
     return 0;
 }
+
