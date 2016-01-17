@@ -35,23 +35,24 @@ struct MatrixNode {
 struct MatrixNode** colHeader;
 struct MatrixNode** rowHeader;
 
-void read(FILE* fin, struct MatrixNode** name_col, struct MatrixNode** name_row, int col, int row);
-void insert(struct MatrixNode** name_col, struct MatrixNode** name_row, int col, int row, int num);
+void read(FILE* fin, struct MatrixNode** name_col, struct MatrixNode** name_row, int* c, int* r);
+void insert(struct MatrixNode** name_col, struct MatrixNode** name_row, int c, int r, int num);
 //int summation();
 //int subtraction();
 //int multiplication();
 
 int main(int argc, char* argv[])
 {
-    FILE* fin = fopen(argv[argc-2], "r");
-    FILE* fout = fopen(argv[argc-1], "w");
+//    FILE* fin = fopen(argv[argc-2], "r");
+//    FILE* fout = fopen(argv[argc-1], "w");
+    FILE* fin = fopen("matrix1.txt", "r");
+    FILE* fout = fopen("result1.txt", "w");
     struct MatrixNode** a_colHeader,** a_rowHeader;
     int a_col, a_row;
     struct MatrixNode** b_colHeader,** b_rowHeader;
     int b_col, b_row;
-    system("pause");
-    read(fin, a_colHeader, a_rowHeader, a_col, a_row);
-    read(fin, b_colHeader, b_rowHeader, b_col, b_row);
+    read(fin, a_colHeader, a_rowHeader, &a_col, &a_row);
+    read(fin, b_colHeader, b_rowHeader, &b_col, &b_row);
 #ifdef DEBUG
     printf("A\n");
     int i;
@@ -63,10 +64,10 @@ int main(int argc, char* argv[])
         }
     printf("B\n");
     for(i = 0; i < a_row; ++i)
-        {
-            printf("%d ", a_rowHeader[i]->value);
-            a_rowHeader[i] = a_rowHeader[i]->down;
-        }
+    {
+        printf("%d ", a_rowHeader[i]->value);
+        a_rowHeader[i] = a_rowHeader[i]->down;
+    }
     printf("B\n");
     for(i = 0; i < b_col; ++i)
         while(b_colHeader[i] != NULL)
@@ -76,85 +77,87 @@ int main(int argc, char* argv[])
         }
     printf("\n");
     for(i = 0; i < b_row; ++i)
-        {
-            printf("%d ", b_rowHeader[i]->value);
-            b_rowHeader[i] = b_rowHeader[i]->down;
-        }
+    {
+        printf("%d ", b_rowHeader[i]->value);
+        b_rowHeader[i] = b_rowHeader[i]->down;
+    }
     printf("\n");
 #endif
-/*    int n;
-    fprintf(fout, "A + B = ");
-    if(n = summation())
-    {
-        fprintf(fout, "(It occupies %d entries.)\n", n);
-        int i, j;
-        for(i = 0; i < a_row; ++i)
-            for(j = 0; j < a_col; ++j)
-                fprintf(fout, "%d ", colHeader[j]->value);
-    }
-    else
-        fprintf(fout, "\nNo operation\n");
-    fprintf(fout, "A - B = ");
-    if(n = subtraction())
-    {
-        fprintf(fout, "(It occupies %d entries.)\n", n);
-        int i, j;
-        for(i = 0; i < a_row; ++i)
-            for(j = 0; j < a_col; ++j)
-                fprintf(fout, "%d ", colHeader[j]->value);
-    }
-    else
-        fprintf(fout, "\nNo operation\n");
-    fprintf(fout, "A * B = ");
-    if(n = multiplication())
-    {
-        fprintf(fout, "(It occupies %d entries.)\n", n);
-        int i, j;
-        for(i = 0; i < a_row; ++i)
-            for(j = 0; j < b_col; ++j)
-                fprintf(fout, "%d ", colHeader[j]->value);
-    }
-    else
-        fprintf(fout, "\nNo operation\n");
-*/    fclose(fin);
+    /*    int n;
+          fprintf(fout, "A + B = ");
+          if(n = summation())
+          {
+          fprintf(fout, "(It occupies %d entries.)\n", n);
+          int i, j;
+          for(i = 0; i < a_row; ++i)
+          for(j = 0; j < a_col; ++j)
+          fprintf(fout, "%d ", colHeader[j]->value);
+          }
+          else
+          fprintf(fout, "\nNo operation\n");
+          fprintf(fout, "A - B = ");
+          if(n = subtraction())
+          {
+          fprintf(fout, "(It occupies %d entries.)\n", n);
+          int i, j;
+          for(i = 0; i < a_row; ++i)
+          for(j = 0; j < a_col; ++j)
+          fprintf(fout, "%d ", colHeader[j]->value);
+          }
+          else
+          fprintf(fout, "\nNo operation\n");
+          fprintf(fout, "A * B = ");
+          if(n = multiplication())
+          {
+          fprintf(fout, "(It occupies %d entries.)\n", n);
+          int i, j;
+          for(i = 0; i < a_row; ++i)
+          for(j = 0; j < b_col; ++j)
+          fprintf(fout, "%d ", colHeader[j]->value);
+          }
+          else
+          fprintf(fout, "\nNo operation\n");
+          */    fclose(fin);
     fclose(fout);
     return 0;
 }
 
-void read(FILE* fin, struct MatrixNode** name_col, struct MatrixNode** name_row, int col, int row)
+void read(FILE* fin, struct MatrixNode** name_col, struct MatrixNode** name_row, int* c, int* r)
 {
     fgetc(fin);
-    fscanf(fin, "%d%d", &row, &col);
+    fscanf(fin, "%d%d", c, r);
     int i, j;
-    for(i = 0; i < col; ++i)
+    for(i = 0; i < *c; ++i)
     {
-        for(j = 0; j < row; ++j)
+        for(j = 0; j < *r; ++j)
         {
             int num;
+            printf("hiii\n");
             fscanf(fin, "%d", &num);
+            printf("hihi");
             insert(name_col, name_row, i, j, num);
         }
     }
 }
 
-void insert(struct MatrixNode** name_col, struct MatrixNode** name_row, int col, int row, int num)
+void insert(struct MatrixNode** name_col, struct MatrixNode** name_row, int c, int r, int num)
 {
-    while(name_col[col] != NULL)
-        name_col[col] = name_col[col]->down;
-    system("pause");
-    name_col[col] = malloc(sizeof(struct MatrixNode));
-    system("pause");
-    name_col[col]->value = num;
-    name_col[col]->col = col;
-    name_col[col]->row = row;
-    while(name_row[row] != NULL)
-        name_row[row] = name_row[row]->right;
-    name_row[row] = name_col[col];
+    while(name_col[c] != NULL)
+        name_col[c] = name_col[c]->down;
+    printf("hihi\n");
+    name_col[c] = malloc(sizeof(struct MatrixNode));
+    printf("hihiHi\n");
+    name_col[c]->value = num;
+    name_col[c]->col = c;
+    name_col[c]->row = r;
+    while(name_row[r] != NULL)
+        name_row[r] = name_row[r]->right;
+    name_row[r] = name_col[c];
     return;
 }
 /*
-int summation()
-{}
+   int summation()
+   {}
 
 int subtraction()
 {}
