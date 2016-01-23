@@ -8,25 +8,24 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-int alex(int c);
-int arth(int a, int b, int w, int x);
 int main()
 {
     int a, b, w, x, c;
+    int times = 0;
     cin >> a >> b >> w >> x >> c;
+    while(c > a)
+    {
+        times++;
+        c--;
+        if(b >= x)
+            b -= x;
+        else
+        {
+            a--;
+            b += w - x;
+        }
+    }
+    cout << times;
     return 0;
-}
-
-int alex(int c)
-{
-    return c-1;
-}
-
-int arth(int a, int b, int w, int x)
-{
-    if(b >= x)
-        return b-x;
-    else
-        return w-x+b;
 }
 
