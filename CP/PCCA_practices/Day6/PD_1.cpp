@@ -11,37 +11,55 @@ using namespace std;
 int a[1000000];
 vector<int> node[1000000];
 bool used[1000000];
+long long int sum;
 
 void dfs(int n, int l)
 {
-    if(l == n+1)
-        return;
-    int sum = 0;
-    if(!node[l].empty())
+    if(used[l] == 0)
     {
-        if(used[node[l].back()]) continue;
-        else
+        sum += a[l];
+        //cout << l << ' ' << sum << endl;
+        used[l] = 1;
+        for(int i = 0; i < node[l].size(); ++i)
         {
-            used[node[l].back()] = 1;
-            dfs(n, node[l].back());
+            if(used[node[l].at(i)]) continue;
+            else dfs(n, node[l].at(i));
         }
     }
+    return;
 }
 
 int main()
 {
-    int n, m;
-    cin >> n >> m;
-    for(int i = 1; i <= n; ++i)
-        cin >> a[i];
-    while(m--)
+    int T;
+    cin >> T;
+    while(T--)
     {
-        int b, c;
-        cin >> b >> c;
-        node[b].push_back(c);
-        node[c].push_back(b);
+        int n, m;
+        cin >> n >> m;
+        for(int i = 1; i <= n; ++i)
+        {
+            node[i].clear();
+            used[i] = 0;
+            cin >> a[i];
+        }
+        while(m--)
+        {
+            int b, c;
+            cin >> b >> c;
+            node[b].push_back(c);
+            node[c].push_back(b);
+        }
+        long long int max = 0;
+        for(int i = 1; i <= n; ++i)
+        {
+            sum = 0;
+            dfs(n, i);
+            if(max < sum)
+                max = sum;
+        }
+        cout << max << endl;
     }
-    dfs(n, 1);
     return 0;
 }
 
