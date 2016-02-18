@@ -16,6 +16,26 @@ int main()
     {
         int n, m;
         cin >> n >> m;
+        queue<int> q[m+1];
+        while(n--)
+        {
+            string mv;
+            cin >> mv;
+            if(mv == "push")
+            {
+                int a, b;
+                scanf("%d%d", &a, &b);
+                q[b].push(a);
+            }
+            else
+            {
+                int ord = 1;
+                while(q[ord].empty())
+                    ord++;
+                cout << q[ord].front() << endl;
+                q[ord].pop();
+            }
+        }
     }
     return 0;
 }

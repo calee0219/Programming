@@ -25,15 +25,16 @@ int main()
         if(che > 3)
         {
             int cc = che;
-            int tmp = inside(x, y);
             if(isline())
             {
-                int tmp_x = nx[1], tmp_y = ny[1], tmp_cc = p[1];
+                int tmp_cc = p[1];
+                long long int tmp_x = nx[1], tmp_y = ny[1];
                 nx[1] = x;
                 ny[1] = y;
                 p[1] = cc;
                 x = tmp_x; y = tmp_y; cc = tmp_cc;
             }
+            int tmp = inside(x, y);
             if(tmp)
             {
                 nx[tmp] = x;
@@ -55,11 +56,6 @@ int main()
 
 int inside(int x, int y)
 {
-    if(abs(nx[1]*ny[2]+nx[2]*ny[3]+nx[3]*ny[1]-ny[1]*nx[2]-ny[2]*nx[3]-ny[3]*nx[1]) >
-            abs(nx[1]*ny[2]+nx[2]*y+x*ny[1]-ny[1]*nx[2]-ny[2]*x-y*nx[1]) +
-            abs(nx[1]*y+x*ny[3]+nx[3]*ny[1]-ny[1]*x-y*nx[3]-ny[3]*nx[1]) +
-            abs(x*ny[2]+nx[2]*ny[3]+nx[3]*y-y*nx[2]-ny[2]*nx[3]-ny[3]*x))
-        return 1;
     if(abs(nx[1]*ny[2]+nx[2]*ny[3]+nx[3]*ny[1]-ny[1]*nx[2]-ny[2]*nx[3]-ny[3]*nx[1]) ==
             abs(nx[1]*ny[2]+nx[2]*y+x*ny[1]-ny[1]*nx[2]-ny[2]*x-y*nx[1]) +
             abs(nx[1]*y+x*ny[3]+nx[3]*ny[1]-ny[1]*x-y*nx[3]-ny[3]*nx[1]) +
@@ -71,6 +67,7 @@ int inside(int x, int y)
             return 2;
         if((nx[3]-nx[1])*(ny[3]-y) == (nx[3]-x)*(ny[3]-ny[1]))
             return 3;
+        else return 1;
     }
     return 0;
 }
