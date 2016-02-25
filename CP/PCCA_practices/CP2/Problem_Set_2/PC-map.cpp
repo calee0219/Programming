@@ -28,14 +28,14 @@ int main()
             cout << m.begin()->first << ' ';
             m.begin()->second--;
             if(m.begin()->second == 0)
-                m.erase(m.begin());
+                m.erase(m.begin()->first);
         }
         else
         {
             cout << m.rbegin()->first << ' ';
-            m.end()->second--;
-            if(m.end()->second == 0)
-                m.erase(m.end());
+            m.rbegin()->second--;
+            if(m.rbegin()->second == 0)
+                m.erase(m.rbegin()->first);
         }
     }
     return 0;
