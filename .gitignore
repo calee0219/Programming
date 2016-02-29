@@ -65,4 +65,7 @@
 # Other files
 test.*
 test
+testdata
+result
+CP/PCCA_practices/CP2/*/*.zip
 
