@@ -1,8 +1,8 @@
 /*************************************************************************
-	> File Name: PC.cpp
-	> Author: Gavin Lee
-	> Mail: sz110010@gmail.com
-	> Created Time: 西元2016年02月24日 (週三) 22時35分47秒
+    > File Name: PC.cpp
+    > Author: Gavin Lee
+    > Mail: sz110010@gmail.com
+    > Created Time: 西元2016年02月24日 (週三) 22時35分47秒
  ************************************************************************/
 
 #include <bits/stdc++.h>
