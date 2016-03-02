@@ -14,8 +14,10 @@ int main()
     cin >> n >> r;
     int wr = 0;
     vector<int> v;
+    int nu = 0;
     for(int i = 0; i < n-1; ++i)
     {
+        nu++;
         int d;
         scanf("%1d", &d);
         v.push_back(d);
@@ -28,7 +30,7 @@ int main()
         wr += 10;
     if(wr < 9 && wr > 0)
     {
-        set<string> s;
+        vector<string> s;
         for(int i = 0; i < n; ++i)
         {
             string str;
@@ -39,14 +41,20 @@ int main()
                 if(j < n-1)
                     str.insert(str.end(), (char)(v.at(j)+'0'));
             }
-            s.insert(str);
+            s.push_back(str);
         }
-        for (set<string>::iterator it=++s.begin(); it!=--s.end(); ++it)
-            cout << *it << endl;
+        sort(s.begin(), s.end());
+        for(int i = 1; i < s.size(); ++i)
+        {
+            if(s.at(i) == s.at(i-1))
+                s.erase(s.begin()+i);
+        }
+        for(int i = 1; i < s.size()-1; ++i)
+            cout << s.at(i) << endl;
     }
     else
     { 
-        set<string> s;
+        vector<string> s;
         for(int i = 0; i < n; ++i)
         {
             string str;
@@ -57,7 +65,7 @@ int main()
                 if(j < n-1)
                     str.insert(str.end(), (char)(v.at(j)+'0'));
             }
-            s.insert(str);
+            s.push_back(str);
             str.clear();
             for(int j = 0; j < n; ++j)
             {
@@ -66,10 +74,16 @@ int main()
                 if(j < n-1)
                     str.insert(str.end(), (char)(v.at(j)+'0'));
             }
-            s.insert(str);
+            s.push_back(str);
         }
-        for (set<string>::iterator it=++s.begin(); it!=--s.end(); ++it)
-            cout << *it << endl;
+        sort(s.begin(), s.end());
+        for(int i = 1; i < s.size(); ++i)
+        {
+            if(s.at(i) == s.at(i-1))
+                s.erase(s.begin()+i);
+        }
+        for(int i = 1; i < s.size()-1; ++i)
+            cout << s.at(i) << endl;
     }
     return 0;
 }
