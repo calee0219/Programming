@@ -43,11 +43,14 @@ int main()
             s.pop();
             s.top() /= tmp;
             break;
-        default:
-            continue;
+		default:
+			break;
         }
     }
     while(c != '\n');
-    cout << s.top() << endl;
+	if(!s.empty())
+		cout << s.top() << endl;
+	else
+		cout << 0 << endl;
     return 0;
 }
