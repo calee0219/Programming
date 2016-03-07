@@ -79,7 +79,7 @@ void bfs(void)
         q.push(make_pair(i-1,j-1));
     // downer right
     if(yes(i+1,j+1) && c[i+1][j+1] == '@' && b[i+1][j+1] == 0)
-        q.push(make_pair(i+1,j));
+        q.push(make_pair(i+1,j+1));
     // downer left
     if(yes(i+1,j-1) && c[i+1][j-1] == '@' && b[i+1][j-1] == 0)
         q.push(make_pair(i+1,j-1));
