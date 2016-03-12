@@ -20,28 +20,28 @@ int main()
     while(T--)
     {
      	string s;
-	cin >> s;
-	double ans = 0;
-	unsigned int ord = 0;
-	while(ord < s.size())
-	{
-	    char tmp;
-	    int num = 0;
-	    if(s[ord] < 'Z' && s[ord] > 'A')
-		tmp = s[ord];
-	    ord++;
-	    while(s[ord] >= '0' && s[ord] <= '9')
-	    {
-		num *= 10;
-		num += s[ord]-'0';
-		ord++;
-	    }
-	    if(num)
-		ans += m[tmp]*num;
-	    else
-		ans += m[tmp];
-	}
-	printf("%.3f\n", ans);
+        cin >> s;
+        double ans = 0;
+        unsigned int ord = 0;
+        while(ord < s.size())
+        {
+            char tmp;
+            int num = 0;
+            if(s[ord] < 'Z' && s[ord] > 'A')
+            tmp = s[ord];
+            ord++;
+            while(s[ord] >= '0' && s[ord] <= '9')
+            {
+                num *= 10;
+                num += s[ord]-'0';
+                ord++;
+            }
+            if(num)
+            ans += m[tmp]*num;
+            else
+            ans += m[tmp];
+        }
+        printf("%.3f\n", ans);
     }
     return 0;
 }
