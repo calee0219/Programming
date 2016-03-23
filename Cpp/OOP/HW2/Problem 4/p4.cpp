@@ -30,15 +30,33 @@ node* findNextNode(int pstart,int istart,int size)
 void Preorder(node *p)
 {
     //fill you code 
+    std::cout << p->s << ' ';
+    if(p->left != NULL)
+        Preorder(p->left);
+    if(p->right != NULL)
+        Preorder(p->right);
+    return;
 }
 void Inorder(node *p)
 {
     //fill you code 
+    if(p->left != NULL)
+        Inorder(p->left);
+    std::cout << p->s << ' ';
+    if(p->right != NULL)
+        Inorder(p->right);
+    return;
 }
 void Postorder(node *p)
 {
 	//fill you code  
+    if(p->left != NULL)
+        Postorder(p->left);
+    if(p->right != NULL)
+        Postorder(p->right);
+    std::cout << p->s << ' ';
 	delete p;
+    return;
 }
 
 int main()  
@@ -53,7 +71,7 @@ int main()
 		for(int i=0;i<n;i++) { std::cin>>in[i]; }
         node* root;
         //generation binary tree
-	 	root =findNextNode(0,0,strlen(pre));
+	 	root = findNextNode(0,0,strlen(pre));
 	 	
 		//preorder trace 
 	 	Preorder(root);
