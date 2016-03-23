@@ -30,6 +30,7 @@ node* findNextNode(int pstart,int istart,int size)
 void Preorder(node *p)
 {
     //fill you code 
+    if(!p) return;
     std::cout << p->s << ' ';
     if(p->left != NULL)
         Preorder(p->left);
@@ -40,6 +41,7 @@ void Preorder(node *p)
 void Inorder(node *p)
 {
     //fill you code 
+    if(!p) return;
     if(p->left != NULL)
         Inorder(p->left);
     std::cout << p->s << ' ';
@@ -50,6 +52,7 @@ void Inorder(node *p)
 void Postorder(node *p)
 {
 	//fill you code  
+    if(!p) return;
     if(p->left != NULL)
         Postorder(p->left);
     if(p->right != NULL)
