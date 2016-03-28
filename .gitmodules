@@ -1,0 +1,3 @@
+[submodule "Cpp/UVa"]
+	path = Cpp/UVa
+	url = https://github.com/asgyk/UVa_cooperate.git
