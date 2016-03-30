@@ -4,3 +4,6 @@
 [submodule "Cpp/NTU"]
 	path = Cpp/NTU
 	url = https://github.com/calee0219/hw_cooperate.git
+[submodule "CP/NCTU_Ragnarok"]
+	path = CP/NCTU_Ragnarok
+	url = https://github.com/calee0219/NCTU_Ragnarok.git
