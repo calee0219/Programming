@@ -9,20 +9,69 @@
 
 #include <bits/stdc++.h>
 #include "MyStack.h"
+#include "Coordinate.h"
 using namespace std;
 
 // MyStack
-MyStack::MyStack() { size=0; }
-MyStack::~MyStack() { size=0; }
 template <class T>
-void MyStack::push(T &stack) {
-    MyStack::MyStack stack = new(MyStack);
+MyStack<T>::MyStack():size(0),head(NULL) {}
+
+template <class T>
+MyStack<T>::~MyStack()
+{
+    if(head == NULL) return;
+    while(head->next != NULL)
+    {
+        Node *tmp_head = head;
+        while((tmp_head->next)->next != NULL)
+            tmp_head = tmp_head->next;
+        delete(tmp_head->next);
+        tmp_head->next = NULL;
+    }
+    return;
 }
-void MyStack::pop() {}
+
 template <class T>
-T& MyStack::top() {}
-size_t MyStack::getSize() const {}
-bool MyStack::empty() const {}
+void MyStack<T>::push(T &t)
+{
+    if(head == NULL)
+    {
+        head = new Node(t,NULL);
+        size = 1;
+        return;
+    }
+    Node *tmp = new Node(t,head);
+    head = tmp;
+    size++;
+    return;
+}
+
+template <class T>
+void MyStack<T>::pop()
+{
+    if(head == NULL) return;
+    Node *tmp = head;
+    head = tmp->next;
+    delete(tmp);
+    size--;
+    return;
+}
+
+template <class T>
+T& MyStack<T>::top()
+{
+    return head->value;
+}
+
+template <class T>
+size_t MyStack<T>::getSize() const { return size; }
+
+template <class T>
+bool MyStack<T>::empty() const { return head == NULL; }
+
 // Node
 template <class T>
-MyStack::Node::(T &stack, Node *node) {}
+MyStack<T>::Node::Node(T &t, Node *node):value(t),next(node) {}
+
+template class MyStack<char>;
+template class MyStack<Coordinate>;
