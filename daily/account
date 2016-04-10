@@ -17,3 +17,5 @@ year    /month  /date   /price  /deal   /title                          /comment
         /3      /29     /-3000  /buy    /logitech MX master 滑鼠        /from 原價屋
         /3      /31     /+1500  /sell   /ASUS ROG Gladiu 滑鼠           /to ptt, 傅裕夫幫我賣的
         /sum            /$-18900
+        /4      /10     /+6000  /earn   /家教                           /一個月
+        /sum            /$-12900
