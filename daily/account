@@ -5,7 +5,7 @@ year    /month  /date   /price  /deal   /title                          /comment
         /sum            /$-7000
 2016    /2      /26     /-5100  /buy    /HHKB pro 二手                  /from ptt HardwareSales,竹北面交
         /sum            /$-12100
-        /3      /02     /+2400  /earn   /家教                           /兩週
+        /3      /02     /+2400  /earn   /家教                           /2月，兩週
         /3      /15     /-700   /buy    /雨傘王超人防身傘               /鄭鈞聯代買,中友團購
         /3      /18     /-550   /buy    /2016打狗週食品預購             /不二家波蘿泡芙香草,波蘿泡芙,萬巒林家豬腳
         /3      /20     /-4000  /buy    /MSI nVidia GTX770 二手         /跟方偉丞買的
@@ -17,7 +17,17 @@ year    /month  /date   /price  /deal   /title                          /comment
         /3      /29     /-3000  /buy    /logitech MX master 滑鼠        /from 原價屋
         /3      /31     /+1500  /sell   /ASUS ROG Gladiu 滑鼠           /to ptt, 傅裕夫幫我賣的
         /sum            /$-18900
-        /4      /10     /+6000  /earn   /家教                           /一個月
+        /4      /10     /+6000  /earn   /家教                           /3月
         /4      /16     /-2000  /buy    /router ASUS RT-N66U            /春季資訊展，傅裕夫幫我付1000
         /4      /16     /-5000  /buy    /Logitech G900                  /春季資訊展，敗家XD
-        /sum            /$-19900
+        /4      /28     /-990   /buy    /Gigabyte wifi-bluetooth card   /原價屋
+        /sum            /$-20090
+        /5      /01     /-1980  /buy    /金士頓 8G DDR4-2133 HyperX     /原價屋 16G -> 32G
+        /5      /01     /-750   /buy    /貓頭鷹 NF-F12                  /原價屋 三風扇
+        /5      /01     /-2790  /buy    /logitech G502                  /原價屋，敗家
+        /5      /01     /+5760  /earn   /圖書館                         /48hr * 120
+        /5      /02     /+2000  /sell   /logitech G430                  /資展G900抽到，賣鄭鈞聯
+        /5      /02     /+7000  /earn   /家教                           /4月
+        /5      /02     /+3000  /sell   /In2uitI500B櫻桃木混合式靜電耳機/清華同學
+        /5      /02     /-6500  /buy    /AKG K7XX                       /from 方偉丞
+        /sum            /-15150
