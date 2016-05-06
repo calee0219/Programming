@@ -48,7 +48,7 @@ public:
 	string toppingName, double toppingCost)
     */
     Topping() {}
-    Topping(string iceCreamName, double iceCreamCost, string toppingName, double toppingCost):IceCream(toppingName+" with "+iceCreamName,iceCreamCost),toppingName(toppingName),toppingCost(toppingCost+iceCreamCost) {}
+    Topping(string iceCreamName, double iceCreamCost, string toppingName, double toppingCost):IceCream(toppingName+" Sundae with "+iceCreamName,iceCreamCost),toppingName(toppingName),toppingCost(toppingCost+iceCreamCost) {}
     virtual ~Topping() {}
 
     /* Write about Topping other member functions*/
@@ -71,7 +71,16 @@ public:
     virtual ~Cookie() {}
 
     /* Write about Cookie other member functions*/
-    virtual string getDetails() { return "("+to_string(number)+" dozen(s) * "+to_string(pricePerDozen)+"/dozen)\n"; }
+    virtual string getDetails() {
+        stringstream s;
+        string strn, strp;
+        s << number;
+        s >> strn;
+        s.clear();
+        s << pricePerDozen;
+        s >> strp;
+        return "("+strn+" dozen(s) * "+strp+"/dozen)\n";
+    }
     virtual double getCost() { return pricePerDozen*number; }
 
 private:
@@ -91,7 +100,16 @@ public:
     virtual ~Candy() {}
 
     /* Write about Candy other member functions*/
-    virtual string getDetails() { return "("+to_string(weight)+" gram(s) * "+to_string(pricePerGram)+"/gram)\n"; }
+    virtual string getDetails() {
+        stringstream s;
+        string strw, strp;
+        s << weight;
+        s >> strw;
+        s.clear();
+        s << pricePerGram;
+        s >> strp;
+        return "("+strw+" gram(s) * "+strp+"/gram)\n";
+    }
     virtual double getCost() { return pricePerGram * weight; }
 
 private:
@@ -151,11 +169,11 @@ ostream &operator<<(ostream &output, Checkout &checkout){
     output << "Welcome to OOP’s shop\n------------------------------\n" << endl;
     output << "Number of items: " << checkout.numberOfIteams() << endl << endl;
     for(list<DessertItem*>::iterator it = checkout.itemList.begin(); it != checkout.itemList.end(); ++it)
-        output << setw(30) << left << (*it)->getName() << setw(10) << right << round((*it)->getCost()) << endl << (*it)->getDetails();
+        output << setw(40) << left << (*it)->getName() << setw(5) << right << round((*it)->getCost()) << endl << (*it)->getDetails();
     output << "\n------------------------------\n";
-    output << setw(30) << left << "Cost" << setw(10) << right << round(checkout.totalCost()) << endl;
-    output << setw(30) << left << "Tax" << setw(10) << right << round(checkout.tax()) << endl << endl;
-    output << setw(30) << left << "Total cost" << setw(10) << right << round(checkout.totalCost()+checkout.tax()) << endl;
+    output << setw(40) << left << "Cost" << setw(5) << right << round(checkout.totalCost()) << endl;
+    output << setw(40) << left << "Tax" << setw(5) << right << round(checkout.tax()) << endl << endl;
+    output << setw(40) << left << "Total cost" << setw(5) << right << round(checkout.totalCost()+checkout.tax()) << endl;
     output.clear();
     return output;
 }
