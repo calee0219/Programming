@@ -138,7 +138,7 @@ public:
         return;
     }
     template<typename T>
-    void removeItem(const T *di) {
+    void removeItem(T *di) {
         itemList.remove(di);
         return;
     }
