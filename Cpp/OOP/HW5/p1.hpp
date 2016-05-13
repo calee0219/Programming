@@ -48,12 +48,12 @@ public:
 	string toppingName, double toppingCost)
     */
     Topping() {}
-    Topping(string iceCreamName, double iceCreamCost, string toppingName, double toppingCost):IceCream(toppingName+" Sundae with "+iceCreamName,iceCreamCost),toppingName(toppingName),toppingCost(toppingCost+iceCreamCost) {}
+    Topping(string iceCreamName, double iceCreamCost, string toppingName, double toppingCost):IceCream(toppingName+" Sundae with "+iceCreamName,iceCreamCost),toppingName(toppingName),toppingCost(toppingCost) {}
     virtual ~Topping() {}
 
     /* Write about Topping other member functions*/
     virtual string getDetails() { return ""; }
-    virtual double getCost() { return toppingCost; }
+    virtual double getCost() { return toppingCost + IceCream::getCost(); }
 
 private:
     string toppingName;
@@ -138,7 +138,7 @@ public:
         return;
     }
     template<typename T>
-    void removeItem(const T *di) {
+    void removeItem(T *di) {
         itemList.remove(di);
         return;
     }
