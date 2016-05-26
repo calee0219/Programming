@@ -401,6 +401,17 @@ auto AVLTree<key_type, mapped_type, key_compare>::iterator::operator++(void) -> 
 		return (*this);
 
 	// TODO: Find the next node in an in-order manner.
+	Node *tmp = CurrentNode;
+	if(CurrentNode->Right != nullptr) {
+		CurrentNode = CurrentNode->Right;
+		while(CurrentNode->Left != nullptr) CurrentNode = CurrentNode->Left;
+	}
+	else {
+		Node *tmp = CurrentNode;
+		key_compare Comp;
+		while(CurrentNode->Parent != nullptr && Comp((CurrentNode->Parent->Mapping).first,(tmp->Mapping).first)) CurrentNode = CurrentNode->Parent;
+		CurrentNode = CurrentNode->Parent;
+	}
 
 	return (*this);
 
@@ -418,6 +429,16 @@ auto AVLTree<key_type, mapped_type, key_compare>::iterator::operator--(void) -> 
 		return (*this);
 
 	// TODO: Find the previous node in an in-order manner.
+	if(CurrentNode->Left != nullptr) {
+		CurrentNode = CurrentNode->Left;
+		while(CurrentNode->Right != nullptr) CurrentNode = CurrentNode->Right;
+	}
+	else {
+		Node *tmp = CurrentNode;
+		key_compare Comp;
+		while(CurrentNode->Parent != nullptr && Comp((tmp->Mapping).first,(CurrentNode->Parent->Mapping).first)) CurrentNode = CurrentNode->Parent;
+		CurrentNode = CurrentNode->Parent;
+	}
 
 	return (*this);
 
@@ -455,6 +476,9 @@ auto AVLTree<key_type, mapped_type, key_compare>::Node::Find(Node* Tree, const k
 
 	// TODO: Use Comp to find where it located.
 	//       You may want to take a look of the implementation of Insert.
+	if(CurrentNode == nullptr) return CurrentNode;
+	else if(Comp(KeyToFind, (CurrentNode->Mapping).first)) CurrentNode = Find(CurrentNode->Left, KeyToFind, Comp);
+	else if(Comp((CurrentNode->Mapping).first, KeyToFind)) CurrentNode = Find(CurrentNode->Right, KeyToFind, Comp);
 
 	return CurrentNode;
 
@@ -586,6 +610,28 @@ auto AVLTree<key_type, mapped_type, key_compare>::Node::RightRotate(Node* ThisNo
 
 	// TODO: Right rotate the tree and return the new root.
 	//       The height of modified trees should also be fixed accordingly.
+	Node *node = ThisNode;
+	Node *child = ThisNode->Left;
+	Node *parent = ThisNode->Parent;
+	node->Left = child->Right;
+	if(child->Right != nullptr) child->Right->Parent = node;
+	child->Right = node;
+	child->Parent = parent;
+	if(parent != nullptr) {
+		if(parent->Left == node) parent->Left = child;
+		else parent->Right = child;
+	}
+	node->Parent = child;
+
+	node->Height = 1 + (HeightOf(node->Right)>HeightOf(node->Left) ? HeightOf(node->Right):HeightOf(node->Left));
+	child->Height = 1 + (HeightOf(child->Right)>HeightOf(child->Left) ? HeightOf(child->Right):HeightOf(child->Left));
+	Node *tmp = child;
+	while(tmp->Parent != nullptr) {
+		tmp = tmp->Parent;
+		tmp->Height = 1 + HeightOf(tmp->Right)>HeightOf(tmp->Left) ? HeightOf(tmp->Right):HeightOf(tmp->Left);
+	}
+
+	ThisNode = child;
 
 	return ThisNode;
 
@@ -601,6 +647,28 @@ auto AVLTree<key_type, mapped_type, key_compare>::Node::LeftRotate(Node* ThisNod
 
 	// TODO: Left rotate the tree and return the new root.
 	//       The height of modified trees should also be fixed accordingly.
+	Node *node = ThisNode;
+	Node *child = ThisNode->Right;
+	Node *parent = ThisNode->Parent;
+	node->Right = child->Left;
+	if(child->Left != nullptr) child->Left->Parent = node;
+	child->Left = node;
+	child->Parent = parent;
+	if(parent != nullptr) {
+		if(parent->Left == node) parent->Left = child;
+		else parent->Right = child;
+	}
+	node->Parent = child;
+
+	node->Height = 1 + (HeightOf(node->Right)>HeightOf(node->Left) ? HeightOf(node->Right):HeightOf(node->Left));
+	child->Height = 1 + (HeightOf(child->Right)>HeightOf(child->Left) ? HeightOf(child->Right):HeightOf(child->Left));
+	Node *tmp = child;
+	while(tmp->Parent != nullptr) {
+		tmp = tmp->Parent;
+		tmp->Height = 1 + HeightOf(tmp->Right)>HeightOf(tmp->Left) ? HeightOf(tmp->Right):HeightOf(tmp->Left);
+	}
+
+	ThisNode = child;
 
 	return ThisNode;
 
