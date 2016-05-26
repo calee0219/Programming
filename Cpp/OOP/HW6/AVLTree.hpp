@@ -401,6 +401,11 @@ auto AVLTree<key_type, mapped_type, key_compare>::iterator::operator++(void) -> 
 		return (*this);
 
 	// TODO: Find the next node in an in-order manner.
+	if(CurrentNode->Right != nullptr) {
+		CurrentNode = CurrentNode->Right;
+		while(CurrentNode->Left != nullptr) CurrentNode = CurrentNode->Left;
+	}
+	else CurrentNode = CurrentNode->Parent;
 
 	return (*this);
 
@@ -418,6 +423,11 @@ auto AVLTree<key_type, mapped_type, key_compare>::iterator::operator--(void) -> 
 		return (*this);
 
 	// TODO: Find the previous node in an in-order manner.
+	if(CurrentNode->Left != nullptr) {
+		CurrentNode = CurrentNode->Left;
+		while(CurrentNode->Right != nullptr) CurrentNode = CurrentNode->Right;
+	}
+	else CurrentNode = CurrentNode->Parent;
 
 	return (*this);
 
@@ -455,6 +465,8 @@ auto AVLTree<key_type, mapped_type, key_compare>::Node::Find(Node* Tree, const k
 
 	// TODO: Use Comp to find where it located.
 	//       You may want to take a look of the implementation of Insert.
+	if(Comp(KeyToFind, CurrentNode)) CurrentNode = AVLTree(CurrentNode->Right, KeyToFind, Comp);
+	else if(Comp(CurrentNode, KeyToFind)) CurrentNode = AVLTree(CurrentNode->Left, KeyToFind, Comp);
 
 	return CurrentNode;
 
@@ -586,6 +598,12 @@ auto AVLTree<key_type, mapped_type, key_compare>::Node::RightRotate(Node* ThisNo
 
 	// TODO: Right rotate the tree and return the new root.
 	//       The height of modified trees should also be fixed accordingly.
+	iterator it = ThisNode;
+	it--;
+	it.CurrentNode->Right = ThisNode;
+	ThisNode->Parent->Left = ThisNode->Left;
+	ThisNode->Left = nullptr;
+	ThisNode->Parent = it.CurrentNode;
 
 	return ThisNode;
 
@@ -601,6 +619,12 @@ auto AVLTree<key_type, mapped_type, key_compare>::Node::LeftRotate(Node* ThisNod
 
 	// TODO: Left rotate the tree and return the new root.
 	//       The height of modified trees should also be fixed accordingly.
+	iterator it = ThisNode;
+	it++;
+	it.CurrentNode->Left = ThisNode;
+	ThisNode->Parent->Right = ThisNode->Right;
+	ThisNode->Right = nullptr;
+	ThisNode->Parent = it.CurrentNode;
 
 	return ThisNode;
 
