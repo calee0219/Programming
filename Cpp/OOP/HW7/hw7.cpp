@@ -20,7 +20,8 @@ using namespace std;
 
 namespace fos {
 	string cat(string);
-	string removetag(string);
+	string removetagF(string);
+	string removetagS(string);
 }
 
 string buf[666];
@@ -37,7 +38,7 @@ int main(int argc, char *argv[])
 			// Get command
 			while(ord < str.length() && (str[ord] == ' ')) ord = ++pre;
 			while(ord < str.length() && str[ord] != ' ' && str[ord] != '|' && str[ord] != '>') ++ord;
-			string command(str.substr(pre,ord));
+			string command(str.substr(pre,ord-pre));
 			pre = ord;
 
 			if(command == "cat") {
@@ -47,7 +48,7 @@ int main(int argc, char *argv[])
 					// get the file name
 					while(ord < str.length() && (str[ord] == ' ')) ord = ++pre;
 					while(ord < str.length() && str[ord] != ' ' && str[ord] != '|' && str[ord] != '>') ++ord;
-					from = str.substr(pre,ord);
+					from = str.substr(pre,ord-pre);
 					pre = ord;
 					tmp_buf = fos::cat(from);
 				}
@@ -59,29 +60,62 @@ int main(int argc, char *argv[])
 				char opera = str[ord];
 				ord = ++pre;
 				if(opera == '|') {
-					string num(str.substr(pre,str.length()));
+					string num(str.substr(pre,str.length()-pre));
 					buf[cha+stoi(num)] += tmp_buf;
 				}
 				else if(opera == '>') {
 					while(ord < str.length() && str[ord] == ' ') ord = ++pre;
 					while(ord < str.length() && str[ord] != ' ') ++ord;
-					string fileName(str.substr(pre,ord));
+					string fileName(str.substr(pre,ord-pre));
 					ofstream of(fileName);
 					of << tmp_buf;
 					of.close();
 				}
-				else {
+				else
 					cout << tmp_buf;
-				}
 			}
 			else if(command == "removetag") {
+				string tmp_buf;
+				string from;
+				if(buf[cha] == "") {
+					// get file name
+					while(ord < str.length() && (str[ord] == ' ')) ord = ++pre;
+					while(ord < str.length() && str[ord] != ' ' && str[ord] != '|' && str[ord] != '>') ++ord;
+					from = str.substr(pre,ord-pre);
+					pre = ord;
+					tmp_buf = fos::removetagF(from);
+				}
+				else
+					tmp_buf = fos::removetagS(buf[cha]);
 
+				// if there is | or >
+				while(ord < str.length() && str[ord] == ' ') ord = ++pre;
+				char opera = str[ord];
+				ord = ++pre;
+				if(opera == '|') {
+					string num(str.substr(pre,str.length()-pre));
+					buf[cha+stoi(num)] += tmp_buf;
+				}
+				else if(opera == '>') {
+					while(ord < str.length() && str[ord] == ' ') ord = ++pre;
+					while(ord < str.length() && str[ord] != ' ') ++ord;
+					string fileName(str.substr(pre,ord-pre));
+					ofstream of(fileName);
+					of << tmp_buf;
+					of.close();
+				}
+				//else {
+					//ofstream of(from);
+					//of << tmp_buf;
+					//of.close();
+				//}
 			}
 			else if(command == "exit") {
 				break;
 			}
 			else {
 				string tmp_buf = "unknow command\n";
+				cout << tmp_buf;
 				continue;
 			}
 			++cha;
@@ -101,10 +135,34 @@ string fos::cat(string file)
 		buf += tmp;
 		buf += "\n";
 	}
+	rf.close();
 	return buf;
 }
 
-string fos::removetag(string)
+string fos::removetagF(string file)
 {
+	ifstream rf(file);
+	string tmp;
+	string buf;
+	while(getline(rf,tmp)) {
+		for(int i = 0; i < tmp.length(); ++i) {
+			if(tmp[i] == '=' || tmp[i] == '"' || tmp[i] == '.' || tmp[i] == ',' || tmp[i] == '+' || tmp[i] == '\'' || tmp[i] == '\\' || tmp[i] == '!' || tmp[i] == '-' || tmp[i] == ';' || tmp[i] == '(' || tmp[i] == ')') continue;
+			else
+				buf.insert(buf.end(),tmp[i]);
+		}
+		buf += "\n";
+	}
+	rf.close();
+	return buf;
+}
 
+string fos::removetagS(string tmp)
+{
+	string buf;
+	for(int i = 0; i < tmp.length(); ++i) {
+		if(tmp[i] == '=' || tmp[i] == '"' || tmp[i] == '.' || tmp[i] == ',' || tmp[i] == '+' || tmp[i] == '\'' || tmp[i] == '\\' || tmp[i] == '!' || tmp[i] == '-' || tmp[i] == ';' || tmp[i] == '(' || tmp[i] == ')') continue;
+		else
+			buf.insert(buf.end(),tmp[i]);
+	}
+	return buf;
 }
