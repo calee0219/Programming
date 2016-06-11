@@ -44,6 +44,12 @@ int main(int argc, char* argv[]){
 	printf("Time taken for creating index: %.2fs\n", index_time);
 	printf("Time taken for making queries: %.2fs\n", query_time);
 
+	cout << "IAH JFK " << result1 << endl;
+	cout << "IAH LAX " << result2 << endl;
+	cout << "JFK LAX " << result3 << endl;
+	cout << "JFK IAH " << result4 << endl;
+	cout << "LAX IAH " << result5 << endl;
+
 	//Cleanup db object
 	mydb.cleanup();
 }

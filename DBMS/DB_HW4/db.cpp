@@ -63,7 +63,24 @@ double db::query(string origin, string dest){
 	//Do the query and return the average ArrDelay of flights from origin to dest.
 	//This method will be called multiple times.
 	FILE* db = fopen(database.c_str(),"r");
-	return 0; //Remember to return your result.
+	char str[666];
+	int sum = 0, cnt = 0;
+	while(fgets(str,666,db)) {
+		int o = 0;
+		char tTime[22],tOrigin[22],tDest[22];
+		sscanf(str,"%[^,],%[^,],%[^,\n]",tTime,tOrigin,tDest);
+		//cout << tTime << ' ' << tOrigin << ' ' << tDest << endl;
+		//string Origin(tOrigin), Dest(tDest);
+		//cout << tOrigin << ' ' << tDest << endl;
+		//cout << origin << ' ' << tOrigin << endl << dest << ' ' << tDest << endl;
+		if(origin == tOrigin && dest == tDest && ((tTime[0] <= '9' && tTime[0] >= '0') || tTime[0] == '-')) {
+			//cout << "hi i'm here" << endl;
+			sum += stoi(tTime);
+			++cnt;
+		}
+	}
+	if(cnt) return (double)sum/cnt;
+	else return 0; //Remember to return your result.
 }
 
 void db::cleanup(){
