@@ -33,14 +33,19 @@ year    /month  /date   /price  /deal   /title                          /comment
         /5      /04     /-2500  /buy    /razer orbweaver                /from 郭柏伸，送建德
         /5      /14     /-4100  /buy    /GA-X150-pro ECC                /from 光華原價屋
         /sum            /-21750
-		/6		/7		/+4000	/earn	/家教							/5月
-		/6		/8		/-1000	/buy	/LAMY safari 鋼筆				/from 世博臺灣館，85折，霧黑
-		/6		/10		/-1300	/buy	/魔獸崛起3D iMax				/三個人的
-		/6		/14		/-500	/buy	/椅子							/覺得被坑@@
-		/6		/17		/-2500	/buy	/酒肉							/梅酒500 + 牛肉2000 -> 冰箱不夠冰，牛肉壞掉QQ
-		/6		/18		/-500	/buy	/ink							/from 好生活手帖，JK埃及玫瑰 + JH午夜藍
-		/6		/19		/-1500	/buy	/超音波清洗機					/from PCHome for 眼鏡&鋼筆
-		/6		/20		/-200	/buy	/小桌子							/from 清交二手
-		/6		/22		/-17000	/buy	/GTX1070 G1 Gamming				/from 原價屋，送overwatch啓元版
-		/6		/25		/+9000	/earn	/圖書館							/79hr * 120
-		/sum			/-31750
+	/6	/7	/+4000	/earn	/家教				/5月
+	/6	/8	/-1000	/buy	/LAMY safari 鋼筆		/from 世博臺灣館，85折，霧黑
+	/6	/10	/-1300	/buy	/魔獸崛起3D iMax		/三個人的
+	/6	/14	/-500	/buy	/椅子				/覺得被坑@@
+	/6	/17	/-2500	/buy	/酒肉				/梅酒500 + 牛肉2000 -> 冰箱不夠冰，牛肉壞掉QQ
+	/6	/18	/-500	/buy	/ink				/from 好生活手帖，JK埃及玫瑰 + JH午夜藍
+	/6	/19	/-1500	/buy	/超音波清洗機			/from PCHome for 眼鏡&鋼筆
+	/6	/20	/-200	/buy	/小桌子				/from 清交二手
+	/6	/22	/-17000	/buy	/GTX1070 G1 Gamming		/from 原價屋，送overwatch啓元版
+	/6	/25	/+9000	/earn	/圖書館				/5月的 79hr * 120
+	/sum		/-31750
+	/7	/7	/-1200	/buy	/SS Dex mousepad		/from 原價屋
+	/7	/10	/-4200	/buy	/intel 240 ssd + WD 1T HD	/from 原價屋
+	/7	/17	/-2500	/buy	/win3*2 + BRITA濾水壺		/from cosco
+	/7	/17	/+4000	/earn	/家教				/6月的
+	/sum		/-36650
