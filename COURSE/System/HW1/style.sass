@@ -1,0 +1,43 @@
+$main_col: blue
+$butt_col: red
+$back_col: #f7f7f7
+
+$bold_siz: 2px
+$butt_wid: 60px
+$butt_hig: 40px
+
+*
+    text-align: center
+    line-height: center
+    font-size: 20px
+    font-family: "Times New Roman", Georgia, Serif
+
+.calculator
+    background-color: $main_col
+    border: $bold_siz
+    width: 50%
+    height: 70%
+
+.display
+    width: 48%
+    height: 40%
+    backgroud-color: yellow
+
+.number
+    display: inline-block
+
+.row
+    display: block
+
+.buttom
+    display: inline-block
+    background-color: $butt_col
+    border: 0px 0px $bold_siz $bold_siz solid black
+    border-radius: 15px
+    width: $butt_wid
+    height: $butt_hig
+
+.operator
+    display: in-block
+    & .buttom
+        display: block
