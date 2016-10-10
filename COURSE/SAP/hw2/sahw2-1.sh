@@ -5,11 +5,9 @@ ls -AlRSF | sort -n -r -k 5| awk 'BEGIN{val=0;fil=0;dir=0;cnt=1;}
 	if(cnt <= 5){
 		print cnt ": " $5 " " $9 " "; cnt++;
 	}
-print $0
 	if($5 != ""){
 		if($1 ~ /dw*/) {
 			dir++;
-			print $1;
 		} else if($1 !~ /lw*/) {
 			val=val+$5;
 			fil++;
