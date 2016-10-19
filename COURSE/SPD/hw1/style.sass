@@ -1,0 +1,78 @@
+$main_col: #202020
+$butt_col: #515151
+$back_col: #f7f7f7
+$dis_col: #f7f7f7
+
+$bold_siz: 6px
+$cal_wid: 30%
+$butt_wid: 60px
+$butt_hig: 40px
+$rad: 10px
+$word_siz: 20px
+
+.calculator
+    margin: auto auto
+    text-align: center
+    vertical-align: middle
+    font-size: $word_siz
+    font-family: "Times New Roman", Georgia, Serif
+    background-color: $main_col
+    border: $bold_siz solid black
+    border-width: 0 $bold_siz $bold_siz 0
+    border-radius: $rad*2
+    width: $cal_wid
+    height: auto
+
+.display
+    position: relative
+    top: 10px
+    margin: $butt_hig*0.5 $butt_wid*0.5
+    background-color: $dis_col
+    //border-style: solid
+    border-width: 0 $bold_siz $bold_siz 0
+    border-radius: $rad*1.5
+    & .hex, .dec, .oct, .bin
+        display: block
+        & .lab
+            display: inline-block
+        & .dis_num
+            display: inline-block
+
+.title
+    margin-bottom: 10px
+    display: block
+
+.input
+    margin: $butt_hig*0.2 auto
+
+.row
+    display: block
+
+.function
+    position: relative
+    //left: -$butt_wid*0.7
+
+.number
+    position: relative
+    //top: -$butt_hig*0.8
+
+.operator
+    //position: relative
+    top: -$butt_hig*0.8
+    & .function
+        position: relative
+        //top: -$butt_hig*0.45
+        //left: 0px
+    & .buttom
+        //display: block
+        margin-top: $butt_hig*0.1
+
+.buttom
+    margin: 2px
+    background-color: $butt_col
+    display: inline-block
+    border: $bold_siz solid black
+    border-width: 0 $bold_siz $bold_siz 0
+    border-radius: $rad
+    width: $butt_wid
+    height: $butt_hig
