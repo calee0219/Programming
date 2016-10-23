@@ -1,7 +1,7 @@
 @import url('https://fonts.googleapis.com/css?family=Open+Sans')
 $main_col: #202020
 $butt_col: #515151
-$back_col: #f7f7f7
+$word_col: #111111
 $dis_col: #f7f7f7
 
 $bold_siz: 0.2em
@@ -12,6 +12,7 @@ $rad: 10px
 $word_siz: 2em
 
 .calculator
+  color: $word_col
   margin: auto auto
   text-align: center
   vertical-align: middle
@@ -28,7 +29,6 @@ $word_siz: 2em
   top: 10px
   margin: $butt_hig*0.5 $butt_wid*0.5
   background-color: $dis_col
-  //border-style: solid
   border-width: 0 $bold_siz $bold_siz 0
   border-radius: $rad*1.5
   & .title
@@ -36,7 +36,15 @@ $word_siz: 2em
   & .block
     display: block
   & .ans
-    margin: $word_siz*0.1 auto
+    margin: $word_siz*0.1 6%
+    text-align: left
+    & .text
+      display: inline-block
+      text-align: left
+    & .num
+      display: inline-block
+      width: 76%
+      text-align: right
   & .hex, .dec, .oct, .bin
     display: inline-block
     margin: $cal_wid*0.01
@@ -61,22 +69,9 @@ $word_siz: 2em
 
 .function
   position: relative
-//left: -$butt_wid*0.7
 
 .number
   position: relative
-//top: -$butt_hig*0.8
-
-.operator
-  //position: relative
-  top: -$butt_hig*0.8
-  & .function
-    position: relative
-  //top: -$butt_hig*0.45
-  //left: 0px
-  & .buttom
-    //display: block
-    margin-top: $butt_hig*0.1
 
 .buttom
   margin: 2px
