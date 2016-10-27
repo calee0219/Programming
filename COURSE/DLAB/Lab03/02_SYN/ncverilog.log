@@ -1,0 +1,10 @@
+ncverilog: 10.20-s114: (c) Copyright 1995-2012 Cadence Design Systems, Inc.
+TOOL:	ncverilog	10.20-s114: Started on Oct 27, 2016 at 04:32:37 EDT
+ncverilog
+	TESTBED.v
+	+define+RTL
+	-access
+	+r
+	+notimingchecks
+ncverilog: *E,FILEMIS: Cannot find the provided file TESTBED.v.
+TOOL:	ncverilog	10.20-s114: Exiting on Oct 27, 2016 at 04:32:37 EDT  (total: 00:00:00)
