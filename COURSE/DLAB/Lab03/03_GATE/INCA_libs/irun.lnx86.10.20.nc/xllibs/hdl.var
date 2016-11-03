@@ -1,6 +1,0 @@
-define LIB_MAP ( $LIB_MAP \
-, ../../../../../../../../cad/CBDLIB/CBDK_IC_Contest_v2.1/Verilog/tsmc13.v => tsmc13 \
-)
-define LIB_MAP ( $LIB_MAP \
-, ../../../../../../../../cad/CBDLIB/CBDK_IC_Contest_v2.1/Verilog/tsmc13.v => tsmc13 \
-)
