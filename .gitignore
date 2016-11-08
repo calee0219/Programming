@@ -69,3 +69,7 @@ testdata
 result
 CP/PCCA_practices/CP2/*/*.zip
 .nfs*
+
+# Editor, IDE
+.alm
+.idea
