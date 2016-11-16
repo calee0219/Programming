@@ -10,3 +10,6 @@ public by Professor [Chun-Ying Huang](http://people.cs.nctu.edu.tw/~chuang/)
 
 ## Used Framework
 - none
+
+## Used Library
+- [jQuery](https://jquery.com/)
