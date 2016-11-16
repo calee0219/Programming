@@ -3,12 +3,12 @@ This is a homework for NCTU's course: [Systematic Programming Design](http://peo
 
 public by Professor [Chun-Ying Huang](http://people.cs.nctu.edu.tw/~chuang/)
 
-Homework 1:
+#### Homework 1:
 - Design a calculator
 - Using HTML and CSS
 - Design two different color font on different git branch
 
-Homework 2:
+#### Homework 2:
 - Implement this calculator's function
 - Using javascript
 
