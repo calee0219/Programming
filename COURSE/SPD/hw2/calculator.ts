@@ -67,8 +67,6 @@ function optToQue() {
 
 function toDec(num: string): string {
   return cType(num,mode,Mode.Dec);
-  //if(num.slice(0,1) === "-") return "-"+Number(head(mode)+num.slice(1,num.length));
-  //return eval(head(mode)+num);
 }
 
 function checkOpt(opt: string): string {
@@ -122,9 +120,6 @@ function operate(): string {
 }
 
 function display() {
-  console.log("buff ",buff," |len ",buff.length);
-  console.log("ans ",ans," |len ",ans.length);
-  console.log("str ",str," |len ",str.length);
   // Function
   if(str.length === 0) $("#func").text(buff);
   else if(sta === State.Opt) $("#func").text(str);
