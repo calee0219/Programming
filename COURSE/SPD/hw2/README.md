@@ -11,6 +11,7 @@ public by Professor [Chun-Ying Huang](http://people.cs.nctu.edu.tw/~chuang/)
 #### Homework 2:
 - Implement this calculator's function
 - Using javascript
+- Two's complement in hex, oct, and bin
 
 ## Used Language
 - HTML5
