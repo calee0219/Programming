@@ -65,13 +65,13 @@ function optToQue() {
   display();
 }
 
-function toDec(num: string) {
+function toDec(num: string): string {
   return cType(num,mode,Mode.Dec);
   //if(num.slice(0,1) === "-") return "-"+Number(head(mode)+num.slice(1,num.length));
   //return eval(head(mode)+num);
 }
 
-function checkOpt(opt: string) {
+function checkOpt(opt: string): string {
   if(opt === 'plus') return '+';
   if(opt === 'minu') return '-';
   if(opt === 'muti') return '*';
@@ -113,7 +113,7 @@ function equal() {
   display();
 }
 
-function operate() {
+function operate(): string {
   var tmpAns: string = ans+toDec(buff);
   if(sta === State.Opt) tmpAns = ans.slice(0,-1);
   tmpAns = eval(tmpAns) + "";
@@ -131,12 +131,24 @@ function display() {
   else $("#func").text(str+buff);
 
   var tmpAns: string = operate();
+  var neg: boolean = Number(tmpAns) < 0;
   if(tmpAns.length === 0) tmpAns = "0";
   $(".buff").text(buff);
-  $("#hex").text(cType(tmpAns,Mode.Dec,Mode.Hex));
-  $("#dec").text(cType(tmpAns,Mode.Dec,Mode.Dec));
-  $("#oct").text(cType(tmpAns,Mode.Dec,Mode.Oct));
-  $("#bin").text(cType(tmpAns,Mode.Dec,Mode.Bin));
+  var numHex: string = cType(tmpAns, Mode.Dec, Mode.Hex);
+  var numDec: string = cType(tmpAns, Mode.Dec, Mode.Dec);
+  var numOct: string = cType(tmpAns, Mode.Dec, Mode.Oct);
+  var numBin: string = cType(tmpAns, Mode.Dec, Mode.Bin);
+  if(neg) {
+    $("#hex").text(cType(eval("0xFFFF"+numDec+"+1")+"",Mode.Dec,Mode.Hex));
+    $("#dec").text(numDec);
+    $("#oct").text(cType(eval("0xFFFF"+numDec+"+1")+"",Mode.Dec,Mode.Oct));
+    $("#bin").text(cType(eval("0xFFFF"+numDec+"+1")+"",Mode.Dec,Mode.Bin));
+  } else {
+    $("#hex").text(numHex);
+    $("#dec").text(numDec);
+    $("#oct").text(numOct);
+    $("#bin").text(numBin);
+  }
 }
 
 function cType(num: string, mof: Mode, mot: Mode): string {
@@ -188,48 +200,79 @@ function backspace() {
   display();
 }
 
-function changeMode() {
+function switchMode() {
+  if(mode === Mode.Hex) changeMode(Mode.Dec);
+  else if(mode === Mode.Dec) changeMode(Mode.Oct);
+  else if(mode === Mode.Oct) changeMode(Mode.Bin);
+  else if(mode === Mode.Bin) changeMode(Mode.Hex);
+}
+
+function changeModeHex() { changeMode(Mode.Hex); }
+
+function changeModeDec() { changeMode(Mode.Dec); }
+
+function changeModeOct() { changeMode(Mode.Oct); }
+
+function changeModeBin() { changeMode(Mode.Bin); }
+
+function changeMode(mo: Mode) {
   equal();
-  if(mode === Mode.Hex) {
-    mode = Mode.Dec;
-    $("#inputMode").text("Dec");
-    $(".hex").addClass('disabled');
-    $(".hex").prop('disabled',true);
-    $(".dec").removeClass('disabled');
-    $(".dec").prop('disabled',false);
-    $(".oct").removeClass('disabled');
-    $(".oct").prop('disabled',false);
-    buff = cType(buff, Mode.Hex, mode);
-  } else if(mode === Mode.Dec) {
-    mode = Mode.Oct;
-    $("#inputMode").text("Oct");
-    $(".hex").addClass('disabled');
-    $(".hex").prop('disabled',true);
-    $(".dec").addClass('disabled');
-    $(".dec").prop('disabled',true);
-    $(".oct").removeClass('disabled');
-    $(".oct").prop('disabled',false);
-    buff = cType(buff, Mode.Dec, mode);
-  } else if(mode === Mode.Oct) {
-    mode = Mode.Bin;
-    $("#inputMode").text("Bin");
-    $(".hex").addClass('disabled');
-    $(".hex").prop('disabled',true);
-    $(".dec").addClass('disabled');
-    $(".dec").prop('disabled',true);
-    $(".oct").addClass('disabled');
-    $(".oct").prop('disabled',true);
-    buff = cType(buff, Mode.Oct, mode);
-  } else if(mode === Mode.Bin) {
+  if(mo === Mode.Hex) {
+    buff = cType(buff, mode, mo);
     mode = Mode.Hex;
     $("#inputMode").text("Hex");
-    $(".hex").removeClass('disabled');
-    $(".hex").prop('disabled',false);
-    $(".dec").removeClass('disabled');
-    $(".dec").prop('disabled',false);
-    $(".oct").removeClass('disabled');
-    $(".oct").prop('disabled',false);
-    buff = cType(buff, Mode.Bin, mode);
+    $(".button.hex").removeClass('disabled');
+    $(".button.hex").prop('disabled',false);
+    $(".button.dec").removeClass('disabled');
+    $(".button.dec").prop('disabled',false);
+    $(".button.oct").removeClass('disabled');
+    $(".button.oct").prop('disabled',false);
+    $("#hexButton").addClass('now');
+    $("#decButton").removeClass('now');
+    $("#octButton").removeClass('now');
+    $("#binButton").removeClass('now');
+  } else if(mo === Mode.Dec) {
+    buff = cType(buff, mode, mo);
+    mode = Mode.Dec;
+    $("#inputMode").text("Dec");
+    $(".button.hex").addClass('disabled');
+    $(".button.hex").prop('disabled',true);
+    $(".button.dec").removeClass('disabled');
+    $(".button.dec").prop('disabled',false);
+    $(".button.oct").removeClass('disabled');
+    $(".button.oct").prop('disabled',false);
+    $("#hexButton").removeClass('now');
+    $("#decButton").addClass('now');
+    $("#octButton").removeClass('now');
+    $("#binButton").removeClass('now');
+  } else if(mo === Mode.Oct) {
+    buff = cType(buff, mode, mo);
+    mode = Mode.Oct;
+    $("#inputMode").text("Oct");
+    $(".button.hex").addClass('disabled');
+    $(".button.hex").prop('disabled',true);
+    $(".button.dec").addClass('disabled');
+    $(".button.dec").prop('disabled',true);
+    $(".button.oct").removeClass('disabled');
+    $(".button.oct").prop('disabled',false);
+    $("#hexButton").removeClass('now');
+    $("#decButton").removeClass('now');
+    $("#octButton").addClass('now');
+    $("#binButton").removeClass('now');
+  } else if(mo === Mode.Bin) {
+    buff = cType(buff, mode, mo);
+    mode = Mode.Bin;
+    $("#inputMode").text("Bin");
+    $(".button.hex").addClass('disabled');
+    $(".button.hex").prop('disabled',true);
+    $(".button.dec").addClass('disabled');
+    $(".button.dec").prop('disabled',true);
+    $(".button.oct").addClass('disabled');
+    $(".button.oct").prop('disabled',true);
+    $("#hexButton").removeClass('now');
+    $("#decButton").removeClass('now');
+    $("#octButton").removeClass('now');
+    $("#binButton").addClass('now');
   }
   display();
 }
@@ -241,9 +284,13 @@ function main(){
   $(".button.c").click(clear);
   $(".button.ce").click(clearNum);
   $(".button.equ").click(equal);
-  $(".button.mode").click(changeMode);
+  $(".button.mode").click(switchMode);
   $(".button.pm").click(plusMin);
   $(".button.bs").click(backspace);
+  $("#hexButton").click(changeModeHex);
+  $("#decButton").click(changeModeDec);
+  $("#octButton").click(changeModeOct);
+  $("#binButton").click(changeModeBin);
   //$(".lBracket").click(lBraToQue);
   //$(".rBracket").click(rBracket);
 }
