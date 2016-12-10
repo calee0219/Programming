@@ -1,0 +1,30 @@
+Running: C:\Xilinx\14.7\ISE_DS\ISE\bin\nt64\unwrapped\fuse.exe -intstyle ise -incremental -lib unisims_ver -lib unimacro_ver -lib xilinxcorelib_ver -o D:/Lab07_0416037/lab07_0416037_isim_beh.exe -prj D:/Lab07_0416037/lab07_0416037_beh.prj work.lab07_0416037 work.glbl 
+ISim P.20131013 (signature 0x7708f090)
+Number of CPUs detected in this system: 4
+Turning on mult-threading, number of parallel sub-compilation jobs: 8 
+Determining compilation order of HDL files
+Analyzing Verilog file "D:/Lab07_0416037/ipcore_dir/sqrt.v" into library work
+Analyzing Verilog file "D:/Lab07_0416037/Lab07.v" into library work
+Analyzing Verilog file "C:/Xilinx/14.7/ISE_DS/ISE//verilog/src/glbl.v" into library work
+WARNING:HDLCompiler:687 - "C:/Xilinx/14.7/ISE_DS/ISE//verilog/src/glbl.v" Line 5: Illegal redeclaration of module <glbl>.
+Starting static elaboration
+Completed static elaboration
+Compiling module GND
+Compiling module VCC
+Compiling module FDRE
+Compiling module FD
+Compiling module LUT3(INIT=8'b10101100)
+Compiling module LUT2(INIT=4'b1000)
+Compiling module INV
+Compiling module SRL16
+Compiling module MUXCY
+Compiling module XORCY
+Compiling module sqrt
+Compiling module lab07_0416037
+Compiling module glbl
+Time Resolution for simulation is 1ps.
+Waiting for 3 sub-compilation(s) to finish...
+Compiled 16 Verilog Units
+Built simulation executable D:/Lab07_0416037/lab07_0416037_isim_beh.exe
+Fuse Memory Usage: 28976 KB
+Fuse CPU Usage: 561 ms

@@ -1,6 +1,3 @@
 [submodule "COURSE/SPD/NCTU_SOFTDEV_2016"]
 	path = COURSE/SPD/NCTU_SOFTDEV_2016
 	url = https://github.com/bananaappletw/NCTU_SOFTDEV_2016.git
-[submodule "COURSE/NCTU_SOFTDEV_2016"]
-	path = COURSE/NCTU_SOFTDEV_2016
-	url = https://github.com/bananaappletw/NCTU_SOFTDEV_2016.git
