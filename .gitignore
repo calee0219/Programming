@@ -63,7 +63,7 @@
 *.dSYM/
 
 # Other files
-test.*
+test.cpp
 test
 testdata
 result
