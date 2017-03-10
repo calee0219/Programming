@@ -1,33 +1,43 @@
-#include <iostream>
 #include <cstdio>
-#include <vector>
-#include <sstream>
+#include <cstring>
 #include <algorithm>
 using namespace std;
 
 int main()
 {
-    freopen ("input.txt","r",stdin);
-    freopen ("output.txt","w",stdout);
+    FILE * oFile, * iFile;
+    iFile = fopen ("input.txt","r");
+    oFile = fopen ("output.txt","w");
     int n;
-    cin >> n;
-    getchar();
+    char enter;
+    fscanf(iFile, "%d", &n);
+    fscanf(iFile, "%c", &enter);
     while(n--) {
-        vector<int> v;
-        string line;
-        getline(cin, line);
-        stringstream ss(line);
-        int tmp;
-        while(ss >> tmp) {
-            //int tmp; ss >> tmp;
-            v.push_back(tmp);
+        int v[100010];
+        char line[100000];
+        int o = 0;
+        for(o = 0;; ++o) {
+            fscanf(iFile, "%c", line+o);
+            if(line[o] == '\n') break;
         }
-        //v.pop_back();
-        sort(v.begin(),v.end());
-        for(int i = 0; i < v.size(); ++i) cout << v[i] << ' ';
-        cout << endl;
+        int tmp = 0;
+        int ord = 0;
+        for(int i = 0; i < o; ++i) {
+            if(line[i] >= '0' && line[i] <= '9') {
+                tmp *= 10;
+                tmp += line[i] - '0';
+                continue;
+            } else {
+                if(tmp) v[ord++] = tmp;
+                tmp = 0;
+            }
+        }
+        if(tmp) v[ord++] = tmp;
+        sort(v,v+ord);
+        for(int i = 0; i < ord; ++i) fprintf(oFile, "%d ", v[i]);
+        fprintf(oFile,"\n");
     }
-    fclose (stdout);
-    fclose (stdin);
+    fclose (iFile);
+    fclose (oFile);
     return 0;
 }
