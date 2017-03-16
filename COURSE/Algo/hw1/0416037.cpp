@@ -1,43 +1,49 @@
+#include <iostream>
 #include <cstdio>
-#include <cstring>
 #include <algorithm>
 using namespace std;
 
+int v[100010];
+char line[1000010];
+
 int main()
 {
-    FILE * oFile, * iFile;
-    iFile = fopen ("input.txt","r");
-    oFile = fopen ("output.txt","w");
+    freopen ("input.txt","r",stdin);
+    freopen ("output.txt","w",stdout);
     int n;
-    char enter;
-    fscanf(iFile, "%d", &n);
-    fscanf(iFile, "%c", &enter);
+    scanf("%d", &n);
+    //getchar();
+    while(true) {
+        char a = getchar();
+        if(a == '\n') break;
+    }
     while(n--) {
-        int v[100010];
-        char line[100000];
         int o = 0;
         for(o = 0;; ++o) {
-            fscanf(iFile, "%c", line+o);
-            if(line[o] == '\n') break;
+            line[o] = getchar();
+            if(line[o] == '\n' || line[o] == EOF) break;
         }
         int tmp = 0;
         int ord = 0;
         for(int i = 0; i < o; ++i) {
             if(line[i] >= '0' && line[i] <= '9') {
+                if(i > 0 && (line[i-1] < '0' || line[i-1] > '9')) {
+                    v[ord++] = tmp;
+                    tmp = 0;
+                }
                 tmp *= 10;
                 tmp += line[i] - '0';
                 continue;
-            } else {
-                if(tmp) v[ord++] = tmp;
-                tmp = 0;
             }
         }
-        if(tmp) v[ord++] = tmp;
+        v[ord++] = tmp;
         sort(v,v+ord);
-        for(int i = 0; i < ord; ++i) fprintf(oFile, "%d ", v[i]);
-        fprintf(oFile,"\n");
+        for(int i = 0; i < ord; ++i) printf("%d ", v[i]);
+        printf("\n");
     }
-    fclose (iFile);
-    fclose (oFile);
+    fclose (stdin);
+    fclose (stdout);
+    char c;
+    for (c = 'A' ; c <= 'Z' ; c++) putchar (c);
     return 0;
 }
