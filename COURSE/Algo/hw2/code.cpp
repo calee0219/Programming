@@ -1,36 +1,34 @@
-#include <bits/stdc++.h>
+#include <iostream>
+#include <fstream>
+#include <string>
 #include <msgpack.hpp>
-using namespace std;
 
 char line[100010];
 char v[100010];
 
 int main()
 {
-	//std::ifstream ifs("input.txt", std::ifstream::in);
-    //std::stringstream buffer;
-    //buffer << ifs.rdbuf();
-    //msgpack::unpacked upd;
-    //msgpack::unpack(upd, buffer.str().data(), buffer.str().size());
-    //std::cout << upd.get() << std::endl;
-	msgpack::sbuffer buffer;
+    std::ifstream ifs("input.txt", std::ifstream::in);
+    std::string buffer((std::istreambuf_iterator<char>(ifs)), std::istreambuf_iterator<char>());
 
-        msgpack::packer<msgpack::sbuffer> pk(&buffer);
-        pk.pack(std::string("Log message ... 1"));
-        pk.pack(std::string("Log message ... 2"));
-        pk.pack(std::string("Log message ... 3"));
+    msgpack::unpacker pac;
+    pac.reserve_buffer( buffer.size() );
+    std::copy( buffer.begin(), buffer.end(), pac.buffer() );
+    pac.buffer_consumed( buffer.size() );
 
-        // deserializes these objects using msgpack::unpacker.
-        msgpack::unpacker pac;
-
-        // feeds the buffer.
-        pac.reserve_buffer(buffer.size());
-        memcpy(pac.buffer(), buffer.data(), buffer.size());
-        pac.buffer_consumed(buffer.size());
-
-        // now starts streaming deserialization.
-        msgpack::object_handle oh;
-        while(pac.next(oh)) {
-            std::cout << oh.get() << std::endl;
-        }
+    msgpack::object_handle oh;
+    bool first = true;
+    while ( pac.next(oh) ) {
+        if(first) { first = false; continue; }
+        msgpack::object obj = oh.get();
+        std::vector<int> arr;
+        obj.convert(arr);
+        sort(arr.begin(), arr.end());
+        std::fstream fout;
+        fout.open("output.txt", std::ios::binary | std::ios::out);
+        msgpack::sbuffer sbuf;
+        msgpack::pack(sbuf, arr);
+        fout.write(sbuf.data(), sbuf.size());
+    }
+    return 0;
 }
