@@ -18,17 +18,17 @@ int main()
 
     msgpack::object_handle oh;
     bool first = true;
+    std::fstream fout;
+    fout.open("output.txt", std::ios::binary | std::ios::out);
+    msgpack::sbuffer sbuf;
     while ( pac.next(oh) ) {
         if(first) { first = false; continue; }
         msgpack::object obj = oh.get();
         std::vector<int> arr;
         obj.convert(arr);
         sort(arr.begin(), arr.end());
-        std::fstream fout;
-        fout.open("output.txt", std::ios::binary | std::ios::out);
-        msgpack::sbuffer sbuf;
         msgpack::pack(sbuf, arr);
-        fout.write(sbuf.data(), sbuf.size());
     }
+    fout.write(sbuf.data(), sbuf.size());
     return 0;
 }
