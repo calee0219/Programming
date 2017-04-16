@@ -5,6 +5,7 @@ import time
 from sklearn.neighbors import KNeighborsClassifier as KNN
 from sklearn.model_selection import KFold
 from sklearn.metrics import confusion_matrix
+from scipy.spatial.distance import cosine
 import pandas as pd
 import numpy as np
 
@@ -18,11 +19,19 @@ data = pd.read_csv(dataset_url, sep=';')
 feature = data.iloc[:, 0:-2]
 target = data.iloc[:, -1]
 
+def cosDist(x, y):
+    return cosine(x, y)
+
+
 def resubstation(dist, algo):
     print("resubstation, algo=%s, dist=%s" % (algo, dist))
     start_time = time.time()
-    nbr = KNN(n_neighbors=11, algorithm=algo, \
-            metric=dist, weights='distance')
+    if dist == 'cosDist':
+        nbr = KNN(n_neighbors=11, algorithm=algo, \
+                metric=cosDist)
+    else:
+        nbr = KNN(n_neighbors=11, algorithm=algo, \
+                metric=dist, weights='distance')
     nbr.fit(feature, np.ravel(target))
     pred = nbr.predict(feature)
     real = np.ravel(target)
@@ -39,8 +48,12 @@ def kfold(dist, algo, foldNum):
     for train, test in kf.split(feature):
         train_feature, test_feature = feature.iloc[train], feature.iloc[test]
         train_target, test_target = target.iloc[train], target.iloc[test]
-        nbr = KNN(n_neighbors=11, algorithm=algo, \
-                metric=dist, weights='distance')
+        if dist == 'cosDist':
+            nbr = KNN(n_neighbors=11, algorithm=algo, \
+                    metric=cosDist)
+        else:
+            nbr = KNN(n_neighbors=11, algorithm=algo, \
+                    metric=dist, weights='distance')
         nbr.fit(train_feature, np.ravel(train_target))
         pred = nbr.predict(test_feature)
         real = np.ravel(test_target)
@@ -66,3 +79,6 @@ print()
 kfold(dist='euclidean', algo='brute', foldNum=12)
 kfold(dist='euclidean', algo='kd_tree', foldNum=12)
 kfold(dist='euclidean', algo='ball_tree', foldNum=12)
+print()
+resubstation(dist='cosDist', algo='brute')
+kfold(dist='cosDist', algo='brute', foldNum=12)

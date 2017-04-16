@@ -1,39 +1,46 @@
 resubstation, algo=brute, dist=manhattan
 1.0
---- 0.5950527191162109 seconds ---
+--- 0.3213200569152832 seconds ---
 resubstation, algo=kd_tree, dist=manhattan
 1.0
---- 0.13326478004455566 seconds ---
+--- 0.04423022270202637 seconds ---
 resubstation, algo=ball_tree, dist=manhattan
 1.0
---- 0.22366738319396973 seconds ---
+--- 0.12113571166992188 seconds ---
 
 resubstation, algo=brute, dist=euclidean
 1.0
---- 0.7271733283996582 seconds ---
+--- 0.3242037296295166 seconds ---
 resubstation, algo=kd_tree, dist=euclidean
 1.0
---- 0.13217759132385254 seconds ---
+--- 0.03449583053588867 seconds ---
 resubstation, algo=ball_tree, dist=euclidean
 1.0
---- 0.11844158172607422 seconds ---
+--- 0.12861132621765137 seconds ---
 
 kFold, foldNum=12, algo=brute, dist=manhattan
-0.624125077904
---- 2.314490795135498 seconds ---
+0.616984874634
+--- 0.3530917167663574 seconds ---
 kFold, foldNum=12, algo=kd_tree, dist=manhattan
-0.622693841188
---- 1.4514367580413818 seconds ---
+0.624340812119
+--- 0.09944438934326172 seconds ---
 kFold, foldNum=12, algo=ball_tree, dist=manhattan
-0.616993364175
---- 1.5499520301818848 seconds ---
+0.621467851607
+--- 0.1721024513244629 seconds ---
 
 kFold, foldNum=12, algo=brute, dist=euclidean
-0.60678044649
---- 2.094804048538208 seconds ---
+0.617799371175
+--- 0.42386317253112793 seconds ---
 kFold, foldNum=12, algo=kd_tree, dist=euclidean
-0.616149903319
---- 1.5096690654754639 seconds ---
+0.620251849721
+--- 0.1088564395904541 seconds ---
 kFold, foldNum=12, algo=ball_tree, dist=euclidean
-0.620257842338
---- 1.5336921215057373 seconds ---
+0.613921648529
+--- 0.17542672157287598 seconds ---
+
+resubstation, algo=brute, dist=cosDist
+0.567782768477
+--- 472.2056438922882 seconds ---
+kFold, foldNum=12, algo=brute, dist=cosDist
+0.459166806494
+--- 430.7043488025665 seconds ---
