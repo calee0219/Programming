@@ -17,7 +17,7 @@ data = pd.read_csv(dataset_url, sep=';')
 # ls.remove('quality')
 # feature = pd.DataFrame(data, columns=ls)
 # target = pd.DataFrame(data, columns=['quality'])
-feature = normalize(data.iloc[:, 0:-2])
+feature = normalize(data.iloc[:, :-1])
 target = np.ravel(data.iloc[:, -1])
 
 
