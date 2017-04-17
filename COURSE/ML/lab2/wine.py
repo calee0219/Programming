@@ -29,10 +29,10 @@ def resubstation(dist, algo):
     print("resubstation, algo=%s, dist=%s" % (algo, dist))
     start_time = time.time()
     if dist == 'cosDist':
-        nbr = KNN(n_neighbors=11, algorithm=algo,
+        nbr = KNN(n_neighbors=13, algorithm=algo,
                   metric=cosDist)
     else:
-        nbr = KNN(n_neighbors=11, algorithm=algo,
+        nbr = KNN(n_neighbors=13, algorithm=algo,
                   metric=dist, weights='distance')
     nbr.fit(feature, target)
     print("---- training time: %s sec ----" % (time.time() - start_time))
@@ -58,10 +58,10 @@ def kfold(dist, algo, foldNum):
         train_target, test_target = target[train], target[test]
         start = time.time()
         if dist == 'cosDist':
-            nbr = KNN(n_neighbors=11, algorithm=algo,
+            nbr = KNN(n_neighbors=13, algorithm=algo,
                       metric=cosDist)
         else:
-            nbr = KNN(n_neighbors=11, algorithm=algo,
+            nbr = KNN(n_neighbors=13, algorithm=algo,
                       metric=dist, weights='distance')
         nbr.fit(train_feature, train_target)
         total_train_time += (time.time() - start)
