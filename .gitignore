@@ -73,3 +73,6 @@ CP/PCCA_practices/CP2/*/*.zip
 # Editor, IDE
 .alm
 .idea
+
+# MacOS
+.DS_Store
